@@ -4,7 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Testing/DEBUG_Stamping.unity
+    guid: 9450bb72849400346a4a151146bae141
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 75d717b1c60302545b9687b78945dbff, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 79e265ce1bc5b6541b290188a59f32e3, type: 2}
