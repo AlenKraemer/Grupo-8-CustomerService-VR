@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: Approve
   m_EditorClassIdentifier: 
   toolName: Approve
-  stampTexture: {fileID: 2800000, guid: db3e7b7c8db355e499429545071a0321, type: 3}
-  stampSize: {x: 1, y: 1}
+  stampTexture: {fileID: 2800000, guid: 3b2e62babc5249f42921c2cd027852cd, type: 3}

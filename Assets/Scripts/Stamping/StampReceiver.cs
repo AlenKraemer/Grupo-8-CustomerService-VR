@@ -7,7 +7,16 @@ public class StampReceiver : MonoBehaviour
     public void HandleStamp(StampData data)
     {
         GameObject stamp = new GameObject("Stamp");
-        stamp.transform.SetPositionAndRotation(data.position, data.rotation);
+        
+        // Set the stamp slightly above the surface to prevent z-fighting
+        Vector3 position = data.position;
+        position.z = transform.position.z - 0.01f; // Slight offset from paper surface
+        
+        // Align rotation to be flat against the paper (assuming paper is flat on the XY plane)
+        Quaternion rotation = Quaternion.identity;
+        rotation.eulerAngles = new Vector3(0, 0, data.rotation.eulerAngles.z); // Only preserve Z rotation for 2D
+        
+        stamp.transform.SetPositionAndRotation(position, rotation);
 
         var spriteRenderer = stamp.AddComponent<SpriteRenderer>();
         spriteRenderer.sprite = Sprite.Create(data.stampSO.stampTexture,
@@ -16,7 +25,10 @@ public class StampReceiver : MonoBehaviour
 
         spriteRenderer.color = GetColorFromInk(data.inkColor);
         stamp.transform.localScale = new Vector3(data.stampSize.x, data.stampSize.y, 1);
-        stamp.transform.SetParent(this.transform);
+        stamp.transform.SetParent(this.transform, true); // Set worldPositionStays to true
+        
+        // Ensure sorting order is appropriate (higher than the paper)
+        spriteRenderer.sortingOrder = 1;
     }
 
     private Color GetColorFromInk(StampInkColor ink)
