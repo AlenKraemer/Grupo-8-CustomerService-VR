@@ -15,12 +15,15 @@ public class StampReceiver : MonoBehaviour
             return;
         }
 
+        // Log incoming data for debugging
+        Debug.Log($"Stamp requested with ink color: {data.inkColor}, StampSO: {data.stampSO.name}");
+
         // Instantiate the template inside the childs GameObject
         GameObject stamp = Instantiate(stampTemplate, _childs.transform);
 
         // Position the stamp at the exact collision point
-        Vector3 position = data.position;
-        stamp.transform.position = position;
+        var position = data.position;
+        stamp.transform.position = new Vector3(position.x, 0, position.z);
 
         // Get the renderer component
         Renderer stampRenderer = stamp.GetComponent<Renderer>();
@@ -30,19 +33,32 @@ public class StampReceiver : MonoBehaviour
             return;
         }
 
+        // Check if the material exists on the stampSO
+        if (data.stampSO._stampMaterial == null)
+        {
+            Debug.LogError("No material found on StampSO");
+            return;
+        }
+
+        // Force destroy any existing material to prevent shared references
+        if (stampRenderer.material != null)
+        {
+            Destroy(stampRenderer.material);
+        }
+
         // Create a completely new material instance
         Material stampMaterial = new Material(data.stampSO._stampMaterial);
-    
-        // Apply the ink color to the new material
+
+        // Get the color based on ink type
         Color inkColor = GetColorFromInk(data.inkColor);
+        Debug.Log($"Using color: {inkColor} for stamp");
+
+        // Apply the ink color to the new material
         stampMaterial.color = inkColor;
-    
+
         // Assign the new material to the renderer
-        stampRenderer.sharedMaterial = null; // Break any shared references
         stampRenderer.material = stampMaterial;
 
-        Debug.Log($"Applying stamp with color: {inkColor}, ink type: {data.inkColor}");
-    
         // Name the stamp with color information for easy identification
         stamp.name = $"Stamp_{data.inkColor}_{System.DateTime.Now.Ticks}";
     }
