@@ -20,8 +20,6 @@ public class StampReceiver : MonoBehaviour
 
         // Position the stamp at the exact collision point
         Vector3 position = data.position;
-
-        // Set position only
         stamp.transform.position = position;
 
         // Get the renderer component
@@ -32,11 +30,19 @@ public class StampReceiver : MonoBehaviour
             return;
         }
 
-        // Create new material instance based on the stamp's material
+        // Create a completely new material instance
         Material stampMaterial = new Material(data.stampSO._stampMaterial);
-        stampMaterial.color = GetColorFromInk(data.inkColor);
+    
+        // Apply the ink color to the new material
+        Color inkColor = GetColorFromInk(data.inkColor);
+        stampMaterial.color = inkColor;
+    
+        // Assign the new material to the renderer
+        stampRenderer.sharedMaterial = null; // Break any shared references
         stampRenderer.material = stampMaterial;
 
+        Debug.Log($"Applying stamp with color: {inkColor}, ink type: {data.inkColor}");
+    
         // Name the stamp with color information for easy identification
         stamp.name = $"Stamp_{data.inkColor}_{System.DateTime.Now.Ticks}";
     }
