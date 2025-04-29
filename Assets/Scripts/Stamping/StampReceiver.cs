@@ -4,31 +4,41 @@ using UnityEngine;
 
 public class StampReceiver : MonoBehaviour
 {
+    [SerializeField] private GameObject _childs;
+    [SerializeField] private GameObject stampTemplate; // Reference to a template stamp GameObject
+
     public void HandleStamp(StampData data)
     {
-        GameObject stamp = new GameObject("Stamp");
-        
-        // Set the stamp slightly above the surface to prevent z-fighting
+        if (_childs == null)
+        {
+            Debug.LogError("Childs GameObject not assigned in StampReceiver");
+            return;
+        }
+
+        // Instantiate the template inside the childs GameObject
+        GameObject stamp = Instantiate(stampTemplate, _childs.transform);
+
+        // Position the stamp at the exact collision point
         Vector3 position = data.position;
-        position.z = transform.position.z - 0.01f; // Slight offset from paper surface
-        
-        // Align rotation to be flat against the paper (assuming paper is flat on the XY plane)
-        Quaternion rotation = Quaternion.identity;
-        rotation.eulerAngles = new Vector3(0, 0, data.rotation.eulerAngles.z); // Only preserve Z rotation for 2D
-        
-        stamp.transform.SetPositionAndRotation(position, rotation);
 
-        var spriteRenderer = stamp.AddComponent<SpriteRenderer>();
-        spriteRenderer.sprite = Sprite.Create(data.stampSO.stampTexture,
-            new Rect(0, 0, data.stampSO.stampTexture.width, data.stampSO.stampTexture.height),
-            new Vector2(0.5f, 0.5f));
+        // Set rotation and position
+        stamp.transform.position = position;
 
-        spriteRenderer.color = GetColorFromInk(data.inkColor);
-        stamp.transform.localScale = new Vector3(data.stampSize.x, data.stampSize.y, 1);
-        stamp.transform.SetParent(this.transform, true); // Set worldPositionStays to true
-        
-        // Ensure sorting order is appropriate (higher than the paper)
-        spriteRenderer.sortingOrder = 1;
+        // Get the renderer component
+        Renderer stampRenderer = stamp.GetComponent<Renderer>();
+        if (stampRenderer == null)
+        {
+            Debug.LogError("No Renderer component found on stampTemplate");
+            return;
+        }
+
+        // Create new material instance based on the stamp's material
+        Material stampMaterial = new Material(data.stampSO._stampMaterial);
+        stampMaterial.color = GetColorFromInk(data.inkColor);
+        stampRenderer.material = stampMaterial;
+
+        // Name the stamp with color information for easy identification
+        stamp.name = $"Stamp_{data.inkColor}_{System.DateTime.Now.Ticks}";
     }
 
     private Color GetColorFromInk(StampInkColor ink)

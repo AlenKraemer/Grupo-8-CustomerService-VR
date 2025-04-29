@@ -8,32 +8,30 @@ public class StampingTool : MonoBehaviour
     public StampSO currentStampSO;
 
     [SerializeField]
-    private Renderer stampHeadRenderer; // Reference to the renderer component
+    private Renderer stampHeadRenderer;
     
     [SerializeField]
-    private float stampForceThreshold = 0.1f; // Minimum force required to trigger a stamp
+    private float stampForceThreshold = 0.1f;
     
     [SerializeField]
-    private bool autoStampOnContact = true; // Whether to automatically stamp on contact
+    private bool autoStampOnContact = true;
 
     public StampEvent OnStamp;
     
     private bool isInContact = false;
     private StampReceiver currentReceiver = null;
+    private Vector3 contactPoint; // Store the contact point
 
     private void Awake()
     {
-        // Get the renderer if not assigned
         if (stampHeadRenderer == null && stampHead != null)
         {
             stampHeadRenderer = stampHead.GetComponent<Renderer>();
         }
     }
 
-    // Add this to the stamp head GameObject (use a child collider with isTrigger=true)
     private void OnTriggerEnter(Collider other)
     {
-        // Skip collision check if there's no ink or stamp
         if (currentInkColor == StampInkColor.None || currentStampSO == null)
         {
             Debug.Log("Ignoring collision because ink color is None or no stamp is set");
@@ -46,7 +44,10 @@ public class StampingTool : MonoBehaviour
             Debug.Log($"Stamp head made contact with StampReceiver: {other.name}");
             currentReceiver = receiver;
             isInContact = true;
-
+            
+            // Calculate closest point on the collider to the stamp head
+            contactPoint = other.ClosestPoint(stampHead.position);
+            
             if (autoStampOnContact)
             {
                 Stamp();
@@ -65,10 +66,8 @@ public class StampingTool : MonoBehaviour
         }
     }
 
-    // For physics-based stamping (non-trigger approach)
     private void OnCollisionEnter(Collision collision)
     {
-        // Skip collision check if there's no ink or stamp
         if (currentInkColor == StampInkColor.None || currentStampSO == null)
         {
             Debug.Log("Ignoring collision because ink color is None or no stamp is set");
@@ -81,7 +80,10 @@ public class StampingTool : MonoBehaviour
             Debug.Log($"Stamp head collided with StampReceiver: {collision.gameObject.name} with force: {collision.relativeVelocity.magnitude}");
             currentReceiver = receiver;
             isInContact = true;
-
+            
+            // Store the contact point from the collision
+            contactPoint = collision.contacts[0].point;
+            
             if (autoStampOnContact)
             {
                 Stamp();
@@ -112,7 +114,7 @@ public class StampingTool : MonoBehaviour
             StampInkColor.Red => Color.red,
             StampInkColor.Green => Color.green,
             StampInkColor.Black => Color.black,
-            _ => Color.white // Default to white for None
+            _ => Color.white
         };
     }
 
@@ -127,7 +129,7 @@ public class StampingTool : MonoBehaviour
             return;
 
         var data = new StampData(
-            stampHead.position,
+            isInContact ? contactPoint : stampHead.position, // Use contact point if in contact
             stampHead.rotation,
             currentStampSO,
             currentInkColor,
@@ -136,11 +138,10 @@ public class StampingTool : MonoBehaviour
 
         OnStamp?.Invoke(data);
         
-        // Direct call to the receiver if in contact
         if (isInContact && currentReceiver != null)
         {
             currentReceiver.HandleStamp(data);
-            Debug.Log($"Successfully stamped on {currentReceiver.name}");
+            Debug.Log($"Successfully stamped on {currentReceiver.name} at position {contactPoint}");
         }
     }
     
