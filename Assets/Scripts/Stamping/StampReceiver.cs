@@ -14,17 +14,17 @@ public class StampReceiver : MonoBehaviour
             Debug.LogError("Childs GameObject not assigned in StampReceiver");
             return;
         }
-
+    
         // Log incoming data for debugging
         Debug.Log($"Stamp requested with ink color: {data.inkColor}, StampSO: {data.stampSO.name}");
-
+    
         // Instantiate the template inside the childs GameObject
         GameObject stamp = Instantiate(stampTemplate, _childs.transform);
-
+    
         // Position the stamp at the exact collision point
         var position = data.position;
-        stamp.transform.position = new Vector3(position.x, 0, position.z);
-
+        stamp.transform.localPosition = new Vector3(position.x, 0, position.z);
+    
         // Get the renderer component
         Renderer stampRenderer = stamp.GetComponent<Renderer>();
         if (stampRenderer == null)
@@ -32,33 +32,33 @@ public class StampReceiver : MonoBehaviour
             Debug.LogError("No Renderer component found on stampTemplate");
             return;
         }
-
+    
         // Check if the material exists on the stampSO
         if (data.stampSO._stampMaterial == null)
         {
             Debug.LogError("No material found on StampSO");
             return;
         }
-
-        // Force destroy any existing material to prevent shared references
-        if (stampRenderer.material != null)
-        {
-            Destroy(stampRenderer.material);
-        }
-
-        // Create a completely new material instance
-        Material stampMaterial = new Material(data.stampSO._stampMaterial);
-
+    
         // Get the color based on ink type
         Color inkColor = GetColorFromInk(data.inkColor);
         Debug.Log($"Using color: {inkColor} for stamp");
-
-        // Apply the ink color to the new material
-        stampMaterial.color = inkColor;
-
-        // Assign the new material to the renderer
-        stampRenderer.material = stampMaterial;
-
+    
+        // Create a completely new material instance
+        Material newMaterial = new Material(data.stampSO._stampMaterial);
+    
+        // Set the main color property of the material
+        newMaterial.SetColor("_Color", inkColor);
+    
+        // If the shader uses "_BaseColor" property (Standard shader in URP/HDRP)
+        if (newMaterial.HasProperty("_BaseColor"))
+        {
+            newMaterial.SetColor("_BaseColor", inkColor);
+        }
+    
+        // Set material to the renderer
+        stampRenderer.material = newMaterial;
+    
         // Name the stamp with color information for easy identification
         stamp.name = $"Stamp_{data.inkColor}_{System.DateTime.Now.Ticks}";
     }
