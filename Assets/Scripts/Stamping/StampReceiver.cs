@@ -23,7 +23,10 @@ public class StampReceiver : MonoBehaviour
     
         // Position the stamp at the exact collision point
         var position = data.position;
-        stamp.transform.localPosition = new Vector3(position.x, 0, position.z);
+        stamp.transform.position = new Vector3(position.x, 0, position.z);
+    
+        // Ensure y position is exactly 0 (additional guarantee)
+        stamp.transform.position = new Vector3(stamp.transform.position.x, 0, stamp.transform.position.z);
     
         // Get the renderer component
         Renderer stampRenderer = stamp.GetComponent<Renderer>();
@@ -47,14 +50,8 @@ public class StampReceiver : MonoBehaviour
         // Create a completely new material instance
         Material newMaterial = new Material(data.stampSO._stampMaterial);
     
-        // Set the main color property of the material
-        newMaterial.SetColor("_Color", inkColor);
-    
-        // If the shader uses "_BaseColor" property (Standard shader in URP/HDRP)
-        if (newMaterial.HasProperty("_BaseColor"))
-        {
-            newMaterial.SetColor("_BaseColor", inkColor);
-        }
+        // Directly set the color property as requested
+        newMaterial.color = inkColor;
     
         // Set material to the renderer
         stampRenderer.material = newMaterial;
