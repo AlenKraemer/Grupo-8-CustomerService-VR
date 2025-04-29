@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ce458f14-3718-4577-8ee2-d21630aef001" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Anses-VR/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Anses-VR/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Testing/DEBUG_Stamping.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Testing/DEBUG_Stamping.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Stamping/StampReceiver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Stamping/StampReceiver.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -105,7 +104,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1745965403198</updated>
-      <workItem from="1745965404460" duration="4601000" />
+      <workItem from="1745965404460" duration="3226000" />
     </task>
     <servers />
   </component>
