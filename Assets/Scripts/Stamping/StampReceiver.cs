@@ -21,7 +21,7 @@ public class StampReceiver : MonoBehaviour
         // Position the stamp at the exact collision point
         Vector3 position = data.position;
 
-        // Set rotation and position
+        // Set position only
         stamp.transform.position = position;
 
         // Get the renderer component
