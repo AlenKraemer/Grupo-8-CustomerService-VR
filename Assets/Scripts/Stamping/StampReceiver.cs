@@ -25,9 +25,6 @@ public class StampReceiver : MonoBehaviour
         var position = data.position;
         stamp.transform.position = new Vector3(position.x, 0, position.z);
     
-        // Ensure y position is exactly 0 (additional guarantee)
-        stamp.transform.position = new Vector3(stamp.transform.position.x, 0, stamp.transform.position.z);
-    
         // Get the renderer component
         Renderer stampRenderer = stamp.GetComponent<Renderer>();
         if (stampRenderer == null)
