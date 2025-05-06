@@ -14,10 +14,7 @@ public class StampReceiver : MonoBehaviour
             Debug.LogError("Childs GameObject not assigned in StampReceiver");
             return;
         }
-    
-        // Log incoming data for debugging
-        Debug.Log($"Stamp requested with ink color: {data.inkColor}, StampSO: {data.stampSO.name}");
-    
+        
         // Instantiate the template inside the childs GameObject
         GameObject stamp = Instantiate(stampTemplate, _childs.transform);
     
@@ -45,8 +42,7 @@ public class StampReceiver : MonoBehaviour
     
         // Get the color based on ink type
         Color inkColor = GetColorFromInk(data.inkColor);
-        Debug.Log($"Using color: {inkColor} for stamp");
-    
+
         // Create a completely new material instance
         Material newMaterial = new Material(data.stampSO._stampMaterial);
     

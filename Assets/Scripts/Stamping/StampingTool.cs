@@ -76,8 +76,7 @@ public class StampingTool : MonoBehaviour
 
         var receiver = collision.gameObject.GetComponent<StampReceiver>();
         if (receiver != null && collision.relativeVelocity.magnitude > stampForceThreshold)
-        {
-            Debug.Log($"Stamp head collided with StampReceiver: {collision.gameObject.name} with force: {collision.relativeVelocity.magnitude}");
+        { 
             currentReceiver = receiver;
             isInContact = true;
             
@@ -103,7 +102,6 @@ public class StampingTool : MonoBehaviour
         {
             Color inkColor = GetColorFromInk(currentInkColor);
             stampHeadRenderer.material.color = inkColor;
-            Debug.Log($"Updated stamp head material color to {inkColor}");
         }
     }
 
@@ -141,7 +139,6 @@ public class StampingTool : MonoBehaviour
         if (isInContact && currentReceiver != null)
         {
             currentReceiver.HandleStamp(data);
-            Debug.Log($"Successfully stamped on {currentReceiver.name} at position {contactPoint}");
         }
     }
     
