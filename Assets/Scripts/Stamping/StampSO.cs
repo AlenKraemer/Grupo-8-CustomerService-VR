@@ -4,5 +4,5 @@ using UnityEngine;
 public class StampSO : ScriptableObject
 {
     public string toolName;
-    public Texture2D stampTexture;
+    public Material _stampMaterial;
 }
