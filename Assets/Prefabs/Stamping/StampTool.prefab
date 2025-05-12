@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Colliders: []
   m_InteractionLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1
   m_InteractionLayers:
     m_Bits: 1
   m_DistanceCalculationMode: 1
@@ -279,19 +279,19 @@ MonoBehaviour:
   m_SnapToColliderVolume: 1
   m_ReinitializeDynamicAttachEverySingleGrab: 1
   m_AttachEaseInTime: 0.15
-  m_MovementType: 2
+  m_MovementType: 0
   m_VelocityDamping: 1
   m_VelocityScale: 1
   m_AngularVelocityDamping: 1
   m_AngularVelocityScale: 1
   m_TrackPosition: 1
-  m_SmoothPosition: 0
-  m_SmoothPositionAmount: 8
-  m_TightenPosition: 0.1
+  m_SmoothPosition: 1
+  m_SmoothPositionAmount: 1.34
+  m_TightenPosition: 0.068
   m_TrackRotation: 1
-  m_SmoothRotation: 0
-  m_SmoothRotationAmount: 8
-  m_TightenRotation: 0.1
+  m_SmoothRotation: 1
+  m_SmoothRotationAmount: 1.57
+  m_TightenRotation: 0.077
   m_TrackScale: 1
   m_SmoothScale: 0
   m_SmoothScaleAmount: 8
@@ -335,7 +335,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stampHead: {fileID: 2448520244029818110}
   currentInkColor: 0
-  currentStampSO: {fileID: 0}
+  currentStampSO: {fileID: 11400000, guid: d0cf86c50b331ba4eb695867b5544739, type: 2}
   stampHeadRenderer: {fileID: 2059008816185217283}
   stampForceThreshold: 0.1
   autoStampOnContact: 1

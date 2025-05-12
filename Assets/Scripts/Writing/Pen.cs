@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class Pen : MonoBehaviour
 {
-    [SerializeField] private Transform _tip;
-    [SerializeField] private int _penSize;
-    [SerializeField] private float _tipHeight;
+    [SerializeField] private Transform tip;
+    [SerializeField] private int penSize;
+    [SerializeField] private float tipHeight;
+    [SerializeField] private LayerMask layerMask;
 
     private Renderer _renderer;
     private Color[] _colors;
@@ -18,8 +19,8 @@ public class Pen : MonoBehaviour
 
     private void Start()
     {
-        _renderer = _tip.GetComponent<Renderer>();
-        _colors = Enumerable.Repeat(_renderer.material.color, _penSize * _penSize).ToArray();
+        _renderer = tip.GetComponent<Renderer>();
+        _colors = Enumerable.Repeat(_renderer.material.color, penSize * penSize).ToArray();
     }
 
     private void Update()
@@ -29,7 +30,7 @@ public class Pen : MonoBehaviour
 
     private void Draw()
     {
-        if(Physics.Raycast(_tip.position, transform.up, out _touch, _tipHeight))
+        if(Physics.Raycast(tip.position, transform.up, out _touch, tipHeight, layerMask))
         {
             if (_touch.transform.CompareTag("Paper"))
             {
@@ -40,26 +41,27 @@ public class Pen : MonoBehaviour
 
                 _touchPos = new Vector2(_touch.textureCoord.x, _touch.textureCoord.y);
 
-                var x = (int)(_touchPos.x * _paper.textureSize.x - (_penSize / 2));
-                var y = (int)(_touchPos.y * _paper.textureSize.y - (_penSize / 2));
+                var x = (int)(_touchPos.x * _paper.textureSize.x - (penSize / 2));
+                var y = (int)(_touchPos.y * _paper.textureSize.y - (penSize / 2));
 
                 if (y < 0 || y > _paper.textureSize.y || x < 0 || x > _paper.textureSize.x) return;
 
                 if (_touchedLastFrame)
                 {
-                    _paper.texture.SetPixels(x, y, _penSize, _penSize, _colors);
+                    _paper.texture.SetPixels(x, y, penSize, penSize, _colors);
 
                     for (float f = 0.01f; f < 1.00f; f+= 0.01f)
                     {
                         var lerpX = (int)Mathf.Lerp(_lastTouchPos.x, x, f);
                         var lerpY = (int)Mathf.Lerp(_lastTouchPos.y, y, f);
-                        _paper.texture.SetPixels(lerpX, lerpY, _penSize, _penSize, _colors);
+                        _paper.texture.SetPixels(lerpX, lerpY, penSize, penSize, _colors);
 
                     }
 
                     transform.rotation = _lastTouchRot;
 
                     _paper.texture.Apply();
+                    _paper.isDone = true;
                 }
 
                 _lastTouchPos = new Vector2(x, y);
