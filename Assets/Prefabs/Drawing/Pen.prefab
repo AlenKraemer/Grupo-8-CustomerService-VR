@@ -123,7 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tip: {fileID: 7222674857499781866}
   penSize: 15
-  tipHeight: 25
+  tipHeight: 1
   layerMask:
     serializedVersion: 2
     m_Bits: 16384
