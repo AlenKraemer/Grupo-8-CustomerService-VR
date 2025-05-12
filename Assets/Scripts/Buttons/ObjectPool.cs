@@ -5,8 +5,8 @@ using UnityEngine;
 public class ObjectPool : MonoBehaviour
 {
     Queue<GameObject> objectsPool;
-    public GameObject objPrefab;
-    public int MaxObjects;
+    [SerializeField] private GameObject objPrefab;
+    [SerializeField] private int MaxObjects;
     // Start is called before the first frame update
     void Awake()
     {
