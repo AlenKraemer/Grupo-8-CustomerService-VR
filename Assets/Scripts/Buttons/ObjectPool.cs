@@ -4,55 +4,47 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
-    private Queue<GameObject> objectsPool;
-    [SerializeField] private GameObject objPrefab;
-    [SerializeField] private int initialObjects;
-    [SerializeField] private int maxObjects;
-    [SerializeField] private int totalObjects;
-    // Start is called before the first frame update
-    void Awake()
-    {
-        objectsPool = new Queue<GameObject>();
-
-        for (int i = 0; i < initialObjects; i++)
-        {
-            GameObject Object = Instantiate(objPrefab);
-            Object.SetActive(false);
-            objectsPool.Enqueue(Object);
-        }
-    }
-
-    private void Update()
-    {
-        totalObjects = objectsPool.Count;
-    }
+    [SerializeField] public GameObject _originalPrefab;
+    [SerializeField] private List<GameObject> _usedPool;
+    [SerializeField] private List<GameObject> _availablePool;
+    [SerializeField] private int _maxObjects;
 
     public GameObject GetObject()
     {
-        if (objectsPool.Count > 0)
+        GameObject pooledObject;
+
+        if (_availablePool.Count > 0)
         {
-            GameObject obj = objectsPool.Dequeue();
-            obj.SetActive(true);
-            return obj;
+            // Reuse from available pool
+            pooledObject = _availablePool[0];
+            pooledObject.SetActive(true);
+            _availablePool.RemoveAt(0);
         }
-        else if (totalObjects < maxObjects)
+        else if (_usedPool.Count + _availablePool.Count < _maxObjects)
         {
-            GameObject obj = Instantiate(objPrefab);
-            totalObjects++;
-            return obj;
+            // Instantiate new if under limit
+            pooledObject = Instantiate(_originalPrefab);
         }
         else
         {
-            // No available objects and max has been reached
+            // Limit reached
             return null;
         }
+
+        _usedPool.Add(pooledObject);
+        return pooledObject;
     }
 
-
-    public void ReturnToPool(GameObject Object)
+    public void ReturnToPool(GameObject recycle)
     {
-        Object.SetActive(false);
-        objectsPool.Enqueue(Object);
+        _usedPool.Remove(recycle);
+        recycle.SetActive(false);
+        _availablePool.Add(recycle);
     }
 
+    public void Clear()
+    {
+        //_usedPool.Clear();
+        _availablePool.Clear();
+    }
 }

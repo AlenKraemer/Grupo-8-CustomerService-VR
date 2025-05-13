@@ -8,7 +8,9 @@ public class SignedPaperSpawner : ObjectSpawner
     public override void SpawnObject()
     {
         GameObject gameObject = objectPool.GetObject();
+        if (gameObject == null) return;
         gameObject.transform.position = spawnPoint.position;
+        gameObject.GetComponent<Paper>().InitializePaper();
         GameManager.Instance.paperUpdater.SetPaper(gameObject.transform);
         GameManager.Instance.paperworkBase = gameObject.GetComponent<PaperworkBase>();
     }
@@ -21,6 +23,6 @@ public class SignedPaperSpawner : ObjectSpawner
 
     public void Finished(Paper paper)
     {
-        objectPool.ReturnToPool(paper.gameObject);
+        objectPool.ReturnToPool(paper.gameObject);   
     }
 }

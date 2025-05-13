@@ -16,6 +16,14 @@ public class Paper : PaperworkBase
         GameManager.Instance.questManager.onButtonPressed += Retreat;
     }
 
+    public void InitializePaper()
+    {
+        paperworkType = PaperworkType.signature;
+        isDone = false;
+        texture = new Texture2D((int)textureSize.x, (int)textureSize.y);
+        thisRenderer.material.mainTexture = texture;
+    }
+
     private void Retreat()
     {
         if (!isDone) return;

@@ -16,6 +16,7 @@ public class CustomerSpawn : ObjectSpawner
     {
         IAData data = GetRandomCustomer();
         GameObject gameObject = objectPool.GetObject();
+        if (gameObject == null) return;
         var customer = gameObject.GetComponent<IAController>();
         customer.Initialize(data);
         customerList.Add(customer);

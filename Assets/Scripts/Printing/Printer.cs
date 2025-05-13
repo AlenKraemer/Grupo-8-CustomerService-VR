@@ -6,7 +6,9 @@ public class Printer : ObjectSpawner
     public override void SpawnObject()
     {
         GameObject gameObject = objectPool.GetObject();
+        if (gameObject == null) return;
         gameObject.transform.position = spawnPoint.position;
+        gameObject.GetComponent<StampReceiver>().InitializeStamp(spawnPoint);
     }
 
     // Start is called before the first frame update

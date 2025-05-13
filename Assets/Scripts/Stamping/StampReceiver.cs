@@ -17,6 +17,16 @@ public class StampReceiver : PaperworkBase
         GameManager.Instance.questManager.onButtonPressed += Retreat;
     }
 
+    public void InitializeStamp(Transform spawnPos)
+    {
+        this.transform.position = spawnPos.position;
+        isDone = false;
+        foreach (Transform child in _childs.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+    }
+
     private void Retreat()
     {
         if (!isDone) return;
