@@ -17,7 +17,7 @@ public class IAController : MonoBehaviour
         _iAModel.SetData(data);
         chatBubble.SetText(_iAModel.paperwork.paperworkText);
         GameManager.Instance.questManager.AddQuestToQueue(_iAModel.id, _iAModel.paperwork.paperworkType);
-        GameManager.Instance.questManager.onButtonPressed += Retreat;
+        GameManager.Instance.questManager.onButtonPressedCustomer += Retreat;
     }
 
     private void Retreat()

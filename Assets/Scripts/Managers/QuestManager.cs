@@ -9,6 +9,7 @@ namespace Score
     public class QuestManager : MonoBehaviour
     {
         public Action onButtonPressed;
+        public Action onButtonPressedCustomer;
 
         public bool isObjectiveCompleted;
 
@@ -34,7 +35,7 @@ namespace Score
             questQueue.Enqueue(questId);
             questList.Add(questId);
             //if (questStates.All(q => q.questId != questId))
-            questStates.Add(new QuestState(questId, paperworkType,false, false));
+            questStates.Add(new QuestState(questId, paperworkType, false, false));
         }
 
         //[ContextMenu("Add Test Quest")]
@@ -61,26 +62,30 @@ namespace Score
             return questStates[servicedCustomers];
         }
 
-        
+
 
         public void CompleteQuest(string questId = "", bool isCompleted = false)
         {
-            if(questId == "")
+            if (questId == "")
             {
                 var currentId = GetQuestStatus();
                 questId = currentId.questId;
-            }  
+            }
             var questState = questStates.FirstOrDefault(q => q.questId == questId);
             //if (questState == null)
             //    questStates.Add(new QuestState(questId, PaperworkType.signature,isCompleted, true));
-            
+
             questState.completed = isCompleted;
             questState.processed = true;
-            
 
-            if (isObjectiveCompleted) UpdateScore();
+
+            if (isObjectiveCompleted)
+            {
+                UpdateScore();
+                onButtonPressed?.Invoke();
+            }
             servicedCustomers++;
-            onButtonPressed?.Invoke();
+            onButtonPressedCustomer?.Invoke();
             isObjectiveCompleted = false;
             GameManager.Instance.customerSpawn.SpawnCustomer();
 
@@ -103,7 +108,7 @@ namespace Score
                 tramitesCompletadosText.text = $"{score.CurrentScore}";
         }
 
-        
+
         //private void AddTestQuests()
         //{
         //    AddQuestToQueue("Form_001");
