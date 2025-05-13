@@ -58,7 +58,7 @@ public class Pen : MonoBehaviour
 
                     }
 
-                    transform.rotation = _lastTouchRot;
+                    transform.rotation =  _lastTouchRot;
 
                     _paper.texture.Apply();
                     _paper.isDone = true;

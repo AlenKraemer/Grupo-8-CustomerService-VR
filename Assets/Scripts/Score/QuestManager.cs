@@ -2,14 +2,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace Score
 {
     public class QuestManager : MonoBehaviour
     {
-        [SerializeField] private ScoreManager scoreManager;
+        public Action onButtonPressed;
+
+        public bool isObjectiveCompleted;
+
         [SerializeField] private Text tramitesCompletadosText;
-        [SerializeField] private float completionChance = 0.5f;
+        private ScoreManager scoreManager;
+        private int servicedCustomers = 0;
 
         private Queue<string> questQueue = new();
         [SerializeField] private List<string> questList = new();
@@ -17,37 +22,28 @@ namespace Score
 
         private void Start()
         {
-            scoreManager ??= FindObjectOfType<ScoreManager>();
-            if (scoreManager == null) Debug.LogError("No ScoreManager found!");
-
+            scoreManager = GameManager.Instance.scoreManager;
             UpdateTramitesCompletadosText();
 
             foreach (string quest in questList) questQueue.Enqueue(quest);
-            if (questQueue.Count == 0) AddTestQuests();
+            //if (questQueue.Count == 0) AddTestQuests();
         }
 
-        public void AddQuestToQueue(string questId)
+        public void AddQuestToQueue(string questId, PaperworkType paperworkType)
         {
             questQueue.Enqueue(questId);
             questList.Add(questId);
-            if (questStates.All(q => q.questId != questId))
-                questStates.Add(new QuestState(questId, false, false));
+            //if (questStates.All(q => q.questId != questId))
+            questStates.Add(new QuestState(questId, paperworkType,false, false));
         }
 
-        [ContextMenu("Add Test Quest")]
-        public void AddTestQuest() => AddQuestToQueue($"Form_{Random.Range(100, 999)}");
+        //[ContextMenu("Add Test Quest")]
+        //public void AddTestQuest() => AddQuestToQueue($"Form_{Random.Range(100, 999)}");
 
         [ContextMenu("Try Complete Current Quest")]
         public void TryCompleteQuest()
         {
-            if (questQueue.Count == 0) { Debug.Log("No quests to complete"); return; }
-
-            string questId = questQueue.Dequeue();
-            questList.RemoveAt(0);
-            bool success = Random.value < completionChance;
-
-            CompleteQuest(questId, success);
-            Debug.Log(success ? $"Completed {questId}" : $"Failed {questId}");
+            CompleteQuest();
         }
 
         [ContextMenu("Force Complete Current Quest")]
@@ -60,31 +56,44 @@ namespace Score
             CompleteQuest(questId, true);
             Debug.Log($"Force completed {questId}");
         }
-
-        private void CompleteQuest(string questId, bool isCompleted)
+        public QuestState GetQuestStatus()
         {
-            var questState = questStates.FirstOrDefault(q => q.questId == questId);
-            if (questState == null)
-                questStates.Add(new QuestState(questId, isCompleted, true));
-            else
-            {
-                questState.completed = isCompleted;
-                questState.processed = true;
-            }
-
-            if (isCompleted) UpdateScore(questId);
+            return questStates[servicedCustomers];
         }
 
-        private void UpdateScore(string questId)
+        
+
+        public void CompleteQuest(string questId = "", bool isCompleted = false)
+        {
+            if(questId == "")
+            {
+                var currentId = GetQuestStatus();
+                questId = currentId.questId;
+            }  
+            var questState = questStates.FirstOrDefault(q => q.questId == questId);
+            //if (questState == null)
+            //    questStates.Add(new QuestState(questId, PaperworkType.signature,isCompleted, true));
+            
+            questState.completed = isCompleted;
+            questState.processed = true;
+            
+
+            if (isObjectiveCompleted) UpdateScore();
+            servicedCustomers++;
+            onButtonPressed?.Invoke();
+            isObjectiveCompleted = false;
+            GameManager.Instance.customerSpawn.SpawnCustomer();
+
+        }
+
+        private void UpdateScore()
         {
             var score = scoreManager?.TramitesCompletadosScore();
             if (score != null)
             {
                 score.IncreaseScore(1);
-                Debug.Log($"Form {questId} completed! Total: {score.CurrentScore}");
                 UpdateTramitesCompletadosText();
             }
-            else Debug.LogError("Score is null!");
         }
 
         private void UpdateTramitesCompletadosText()
@@ -94,19 +103,13 @@ namespace Score
                 tramitesCompletadosText.text = $"{score.CurrentScore}";
         }
 
-        public string GetQuestStatusInfo()
-        {
-            int completed = questStates.Count(q => q.completed);
-            int processed = questStates.Count(q => q.processed);
-            return $"Current: {(questQueue.Count > 0 ? questQueue.Peek() : "None")} | Queued: {questQueue.Count} | Completed: {completed} | Processed: {processed}";
-        }
-
-        private void AddTestQuests()
-        {
-            AddQuestToQueue("Form_001");
-            AddQuestToQueue("Form_002");
-            AddQuestToQueue("Form_003");
-            AddQuestToQueue("Form_004");
-        }
+        
+        //private void AddTestQuests()
+        //{
+        //    AddQuestToQueue("Form_001");
+        //    AddQuestToQueue("Form_002");
+        //    AddQuestToQueue("Form_003");
+        //    AddQuestToQueue("Form_004");
+        //}
     }
 }

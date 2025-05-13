@@ -1,11 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class StampReceiver : MonoBehaviour
+public class StampReceiver : PaperworkBase
 {
     [SerializeField] private GameObject _childs;
     [SerializeField] private GameObject stampTemplate; // Reference to a template stamp GameObject
+
+    private void Awake()
+    {
+        paperworkType = PaperworkType.stamp;
+        isDone = false;
+    }
+
+    private void Start()
+    {
+        GameManager.Instance.questManager.onButtonPressed += Retreat;
+    }
+
+    private void Retreat()
+    {
+        if (!isDone) return;
+        GameManager.Instance.stampSpawn.Finished(this);
+    }
 
     public void HandleStamp(StampData data)
     {
@@ -20,11 +36,12 @@ public class StampReceiver : MonoBehaviour
     
         // Position the stamp at the exact collision point
         var position = data.position;
-        stamp.transform.position = new Vector3(position.x, 0, position.z);
-    
+        stamp.transform.position = new Vector3(position.x, position.y, position.z);
+
         // Ensure y position is exactly 0 (additional guarantee)
-        stamp.transform.position = new Vector3(stamp.transform.position.x, 0, stamp.transform.position.z);
-    
+        stamp.transform.position = new Vector3(stamp.transform.position.x, stamp.transform.position.y, stamp.transform.position.z);
+
+
         // Get the renderer component
         Renderer stampRenderer = stamp.GetComponent<Renderer>();
         if (stampRenderer == null)
@@ -54,6 +71,7 @@ public class StampReceiver : MonoBehaviour
     
         // Name the stamp with color information for easy identification
         stamp.name = $"Stamp_{data.inkColor}_{System.DateTime.Now.Ticks}";
+        isDone = true;
     }
 
     private Color GetColorFromInk(StampInkColor ink)
@@ -65,5 +83,11 @@ public class StampReceiver : MonoBehaviour
             StampInkColor.Black => Color.black,
             _ => Color.gray
         };
+    }
+
+    private void OnDisable()
+    {
+        paperworkType = PaperworkType.stamp;
+        isDone = false;
     }
 }

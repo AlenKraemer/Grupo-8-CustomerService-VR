@@ -4,22 +4,20 @@ using UnityEngine;
 
 public class DeliveredPaperwork : MonoBehaviour
 {
-    public static Action onPaperworkDelivered;
     private void OnTriggerEnter(Collider other)
     {
         var paperwork = other.GetComponent<PaperworkBase>();
-        if(paperwork.paperworkType == LevelManager.Instance.CurrentPaperwork && paperwork.isDone)
+        if (paperwork == null) paperwork = other.GetComponentInParent<PaperworkBase>();
+        if (paperwork == null) paperwork = GameManager.Instance.paperworkBase;
+        var currentPaperwork = GameManager.Instance.questManager.GetQuestStatus();
+        if (paperwork.paperworkType == currentPaperwork.paperworkType && paperwork.isDone)
         {
-            //sumar puntos
-            Debug.Log("sume puntos");
+            GameManager.Instance.questManager.isObjectiveCompleted = true;
         }
         else
         {
-            //restar puntos
-            Debug.Log("reste puntos");
-
+            GameManager.Instance.questManager.isObjectiveCompleted = false;
         }
-        LevelManager.Instance.NewCustomer();
-        onPaperworkDelivered?.Invoke();
+
     }
 }

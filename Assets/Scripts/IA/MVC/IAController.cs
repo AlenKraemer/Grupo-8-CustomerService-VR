@@ -1,4 +1,5 @@
 using UnityEngine;
+using Score;
 
 public class IAController : MonoBehaviour
 {
@@ -6,27 +7,24 @@ public class IAController : MonoBehaviour
     [SerializeField] private IAData dataTest;
     private IAModel _iAModel;
 
-    private void Start()
+    private void Awake()
     {
         _iAModel = GetComponent<IAModel>();
-        _iAModel.SetData(dataTest);
-        chatBubble.SetText(_iAModel.paperwork.paperworkText);
-        LevelManager.Instance.SetPaperwork(_iAModel.paperwork.paperworkType);
-        DeliveredPaperwork.onPaperworkDelivered += Retreat;
-
     }
 
     public void Initialize(IAData data)
     {
-        _iAModel = GetComponent<IAModel>();
         _iAModel.SetData(data);
         chatBubble.SetText(_iAModel.paperwork.paperworkText);
-        LevelManager.Instance.SetPaperwork(_iAModel.paperwork.paperworkType);
+        GameManager.Instance.questManager.AddQuestToQueue(_iAModel.id, _iAModel.paperwork.paperworkType);
+        GameManager.Instance.questManager.onButtonPressed += Retreat;
     }
 
     private void Retreat()
     {
-        //cambiar esto a que se apague con un pool
-        Destroy(this.gameObject);
+        GameManager.Instance.customerSpawn.FinishedCustomer(this);
+
     }
+
+
 }

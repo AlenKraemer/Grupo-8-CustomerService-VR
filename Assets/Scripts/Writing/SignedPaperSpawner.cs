@@ -1,12 +1,16 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Printer : ObjectSpawner
+public class SignedPaperSpawner : ObjectSpawner
 {
     [SerializeField] private Transform spawnPoint;
     public override void SpawnObject()
     {
         GameObject gameObject = objectPool.GetObject();
         gameObject.transform.position = spawnPoint.position;
+        GameManager.Instance.paperUpdater.SetPaper(gameObject.transform);
+        GameManager.Instance.paperworkBase = gameObject.GetComponent<PaperworkBase>();
     }
 
     // Start is called before the first frame update
@@ -15,8 +19,8 @@ public class Printer : ObjectSpawner
         objectPool = GetComponent<ObjectPool>();
     }
 
-    public void Finished(StampReceiver stampReceiver)
+    public void Finished(Paper paper)
     {
-        objectPool.ReturnToPool(stampReceiver.gameObject);
+        objectPool.ReturnToPool(paper.gameObject);
     }
 }

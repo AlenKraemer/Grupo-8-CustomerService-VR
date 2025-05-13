@@ -6,6 +6,7 @@ public class IAData : ScriptableObject
     public Mesh bodyType;
     public Material skinColor;
     public Paperwork paperwork;
+    public string id;
 }
 
 [System.Serializable]
