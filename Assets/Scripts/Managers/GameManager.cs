@@ -19,4 +19,18 @@ public class GameManager : MonoBehaviour
         else Instance = this;
     }
 
+
+    public void StopCollider()
+    {
+        if (paperworkBase == null) return;
+        paperworkBase.GetComponent<MeshCollider>().enabled = false;
+    }
+
+    public void StartCollider()
+    {
+        if (paperworkBase == null) return;
+        paperworkBase.GetComponent<MeshCollider>().enabled = true;
+
+    }
+
 }
