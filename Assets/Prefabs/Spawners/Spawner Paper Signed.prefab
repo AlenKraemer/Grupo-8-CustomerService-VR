@@ -10,12 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 2014536046252014786}
   - component: {fileID: 1129515919343160483}
+  - component: {fileID: 8920212379375878633}
   m_Layer: 0
-  m_Name: Printer
+  m_Name: Spawner Paper Signed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2014536046252014786
 Transform:
@@ -25,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 854144001293579139}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.8726, y: 0.99, z: -6.636}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 6.945, y: 15.832, z: -40.666}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44,6 +45,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32ee8c4f78144e74997c0567821eb1f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objPrefab: {fileID: 6677267250215306300, guid: 595f7a68d8ae6fa4abcfa0b4d8d25ecc, type: 3}
-  initialObjects: 0
-  maxObjects: 0
+  _originalPrefab: {fileID: 4189162169952983764, guid: d1943ad98c74c4f46b57bf591b84be76, type: 3}
+  _usedPool: []
+  _availablePool: []
+  _maxObjects: 1
+--- !u!114 &8920212379375878633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854144001293579139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da3b43450c3c17d47965a82f4772c8fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectPool: {fileID: 1129515919343160483}
+  spawnPoint: {fileID: 2014536046252014786}

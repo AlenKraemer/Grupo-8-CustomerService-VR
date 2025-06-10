@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 6691303612906915027}
   - component: {fileID: 1800498116444741496}
   m_Layer: 0
-  m_Name: StampReciever
+  m_Name: Stamp Reciever
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

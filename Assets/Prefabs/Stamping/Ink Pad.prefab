@@ -378,7 +378,7 @@ GameObject:
   - component: {fileID: 4163350976875621332}
   - component: {fileID: 8804261053818951877}
   m_Layer: 0
-  m_Name: InkPad
+  m_Name: Ink Pad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

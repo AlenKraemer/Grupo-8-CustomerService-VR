@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7617857287355652610
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 247370441637264004}
+  - component: {fileID: 878175866890426241}
+  - component: {fileID: 2447931929554780159}
+  m_Layer: 0
+  m_Name: Spawner Customer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &247370441637264004
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7617857287355652610}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5.64, y: 14.672, z: -30.923}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &878175866890426241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7617857287355652610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcb28653734d1954ea630b4a0499b5b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectPool: {fileID: 2447931929554780159}
+  spawnPoint: {fileID: 0}
+  customerData:
+  - {fileID: 11400000, guid: 96d5ab6796f94a94b9daef203d79f3bc, type: 2}
+  - {fileID: 11400000, guid: afcb3dc76633cdb49aa130e68f80eabd, type: 2}
+  - {fileID: 11400000, guid: 81a4f40bce264174aa4984fde136db09, type: 2}
+  - {fileID: 11400000, guid: e158f5a5da7699a40bbcb09300fa9e7c, type: 2}
+  customerList: []
+--- !u!114 &2447931929554780159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7617857287355652610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32ee8c4f78144e74997c0567821eb1f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _originalPrefab: {fileID: 6255018815869866859, guid: 45fe3ffe4b899c2459f34a5765d987cd, type: 3}
+  _usedPool: []
+  _availablePool: []
+  _maxObjects: 3

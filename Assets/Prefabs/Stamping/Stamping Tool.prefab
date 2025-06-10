@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2059008816185217283}
   - component: {fileID: 6172097762731653497}
   m_Layer: 0
-  m_Name: StampHead
+  m_Name: Stamp Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 1447279577214424396}
   - component: {fileID: 5958726582756095332}
   m_Layer: 0
-  m_Name: StampTool
+  m_Name: Stamping Tool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
