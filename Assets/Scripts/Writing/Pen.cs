@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine;
 
-public class Pen : MonoBehaviour
+public class Pen : MonoBehaviour, IUpdatable
 {
     [SerializeField] private Transform tip;
     [SerializeField] private int penSize;
@@ -19,11 +19,12 @@ public class Pen : MonoBehaviour
 
     private void Start()
     {
+        CustomUpdateManager.Instance.Suscribe(this);
         _renderer = tip.GetComponent<Renderer>();
         _colors = Enumerable.Repeat(_renderer.material.color, penSize * penSize).ToArray();
     }
 
-    private void Update()
+    public void OnUpdate()
     {
         Draw();
     }
@@ -74,4 +75,6 @@ public class Pen : MonoBehaviour
         _paper = null;
         _touchedLastFrame = false;
     }
+
+   
 }

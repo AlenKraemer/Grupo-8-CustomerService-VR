@@ -1,5 +1,4 @@
 using UnityEngine;
-using Score;
 
 public class IAController : MonoBehaviour
 {

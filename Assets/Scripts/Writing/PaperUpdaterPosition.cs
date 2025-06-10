@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PaperUpdaterPosition : MonoBehaviour
+public class PaperUpdaterPosition : MonoBehaviour, IUpdatable
 {
     [SerializeField] private Transform paperPos;
     [SerializeField]private Vector3 initialOffset;
@@ -10,13 +10,14 @@ public class PaperUpdaterPosition : MonoBehaviour
 
     private void Start()
     {
+        CustomUpdateManager.Instance.Suscribe(this);
         myRenderer = GetComponent<Renderer>();
         initialPos = this.transform.position;
         GameManager.Instance.questManager.onButtonPressed += Retreat;
     }
 
 
-    private void Update()
+    public void OnUpdate()
     {
         if (paperPos == null) return;
         paperPos.position = this.transform.position + initialOffset ;
@@ -33,4 +34,6 @@ public class PaperUpdaterPosition : MonoBehaviour
     {
         myRenderer.enabled = false;
     }
+
+   
 }
