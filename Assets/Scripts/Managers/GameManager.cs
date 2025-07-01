@@ -35,6 +35,8 @@ namespace Managers
 
         private void Awake()
         {
+            Cursor.lockState = CursorLockMode.Locked;
+            
             if (Instance != null && Instance != this) 
             {
                 Destroy(this);

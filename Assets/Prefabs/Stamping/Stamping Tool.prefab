@@ -17,7 +17,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 1
   m_IsActive: 1
 --- !u!4 &2448520244029818110
 Transform:
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 2620398691598915083}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 4911033607785692423, guid: e6ff27e1aad52c5459517e215931c5e8, type: 3}
+  - {fileID: 2100000, guid: 8af8627034a468342854b1eaa636478b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -72,7 +72,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
+  m_ReceiveGI: 2
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -333,10 +333,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d7be197bf6aee49badac06ff241984, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StampHead: {fileID: 0}
+  StampHead: {fileID: 2448520244029818110}
   CurrentInkColor: 0
-  CurrentStampSO: {fileID: 0}
-  _stampHeadRenderer: {fileID: 0}
+  CurrentStampSO: {fileID: 11400000, guid: d0cf86c50b331ba4eb695867b5544739, type: 2}
+  _stampHeadRenderer: {fileID: 2059008816185217283}
   _stampForceThreshold: 0.1
   _autoStampOnContact: 1
   OnStamp:
