@@ -1393,17 +1393,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 86331954}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &187041905 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1642584829189255997, guid: 35e2530fe0a88fa41a1f905b65592c0a, type: 3}
-  m_PrefabInstance: {fileID: 78896176688004551}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da3b43450c3c17d47965a82f4772c8fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &187041906 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8489822718592963184, guid: 35e2530fe0a88fa41a1f905b65592c0a, type: 3}
@@ -1587,7 +1576,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3701010965745672719, guid: 5a264908a918f3448892dafe1da5a733, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15.88
+      value: 15.772
       objectReference: {fileID: 0}
     - target: {fileID: 3701010965745672719, guid: 5a264908a918f3448892dafe1da5a733, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3079,17 +3068,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 247370441637264004, guid: 48b4078d6bc70ec45bf627944a562560, type: 3}
   m_PrefabInstance: {fileID: 5451141944389741742}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1035294315 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 878175866890426241, guid: 48b4078d6bc70ec45bf627944a562560, type: 3}
-  m_PrefabInstance: {fileID: 5451141944389741742}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcb28653734d1954ea630b4a0499b5b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1084262123
 GameObject:
   m_ObjectHideFlags: 0
@@ -3279,7 +3257,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 187041905}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SignedPaperSpawner, Assembly-CSharp
         m_MethodName: SpawnObject
         m_Mode: 1
@@ -3727,9 +3705,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1220623065}
   - component: {fileID: 1220623066}
-  - component: {fileID: 1220623067}
   m_Layer: 0
-  m_Name: ScoreManager
+  m_Name: CustomUpdaterManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3759,24 +3736,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1220623064}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93bd5762b76048ecabb68dfc2699bea7, type: 3}
+  m_Script: {fileID: 11500000, guid: 237f4f0b0c3e94f4f801531df796268d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tramitesCompletados: {fileID: 1220623067}
---- !u!114 &1220623067
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1220623064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3ae467801834e96bd7952ba70d3a08f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentScore: 0
-  scoreMultiplier: 1
 --- !u!1 &1239235357
 GameObject:
   m_ObjectHideFlags: 0
@@ -4857,12 +4819,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questManager: {fileID: 1894450331}
-  customerSpawn: {fileID: 1035294315}
-  signedPaperSpawn: {fileID: 0}
-  stampSpawn: {fileID: 0}
-  scoreManager: {fileID: 1220623066}
   paperUpdater: {fileID: 37739419}
   paperworkBase: {fileID: 0}
+  _customerSpawnerData:
+    _spawnPoint: {fileID: 0}
+    _customerData: []
+    _customerPrefab: {fileID: 0}
+    _maxCustomers: 5
+  _signedPaperSpawnerData:
+    _spawnPoint: {fileID: 0}
+    _paperPrefab: {fileID: 0}
+    _maxPapers: 10
+  _stampSpawnerData:
+    _spawnPoint: {fileID: 0}
+    _stampPrefab: {fileID: 0}
+    _stampTemplate: {fileID: 0}
+    _maxStamps: 5
+  _tramitesCompletados:
+    currentScore: 0
+    scoreMultiplier: 1
 --- !u!1 &1674169555
 GameObject:
   m_ObjectHideFlags: 0
@@ -5649,7 +5624,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 919132148095026749}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Printer, Assembly-CSharp
         m_MethodName: SpawnObject
         m_Mode: 1
@@ -5980,17 +5955,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2002859869696538779, guid: 0705f536f8394df44923f1b8538e657e, type: 3}
   m_PrefabInstance: {fileID: 3813426102501635286}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &919132148095026749 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3457622148780095881, guid: 0705f536f8394df44923f1b8538e657e, type: 3}
-  m_PrefabInstance: {fileID: 3813426102501635286}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df1875ccc87b100428015ab495023fb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &3813426102501635286
 PrefabInstance:
   m_ObjectHideFlags: 0

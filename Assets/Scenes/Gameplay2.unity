@@ -3706,7 +3706,7 @@ GameObject:
   - component: {fileID: 1220623065}
   - component: {fileID: 1220623066}
   m_Layer: 0
-  m_Name: ScoreManager
+  m_Name: CustomUpdaterManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
