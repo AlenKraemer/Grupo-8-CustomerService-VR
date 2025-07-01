@@ -4761,7 +4761,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7158499002710952085, guid: 46b7408c1bcda2641a1bbb0d3aa1abb6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15.885
+      value: 15.838
       objectReference: {fileID: 0}
     - target: {fileID: 7158499002710952085, guid: 46b7408c1bcda2641a1bbb0d3aa1abb6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4999,8 +4999,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.013634647, y: 0.02526388, z: 0.012443736}
-  m_Center: {x: -0.019974973, y: -0.0046251775, z: -0.006078173}
+  m_Size: {x: 0.01356499, y: 0.02526388, z: 0.0111894095}
+  m_Center: {x: -0.020009799, y: -0.0046251775, z: -0.0045503927}
 --- !u!65 &1680088380
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5020,8 +5020,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.01301767, y: 0.02526388, z: 0.012443736}
-  m_Center: {x: 0.020326244, y: -0.0046251775, z: -0.006078173}
+  m_Size: {x: 0.013017667, y: 0.02526388, z: 0.01110738}
+  m_Center: {x: 0.020326244, y: -0.0046251775, z: -0.00448879}
 --- !u!65 &1680088381
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5041,8 +5041,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.02695543, y: 0.011530203, z: 0.012443736}
-  m_Center: {x: 0.00026646614, y: 0.0022416643, z: -0.006078173}
+  m_Size: {x: 0.027117956, y: 0.011530203, z: 0.0112126265}
+  m_Center: {x: 0.0003477347, y: 0.0022416646, z: -0.0045387843}
 --- !u!1 &1704705395
 GameObject:
   m_ObjectHideFlags: 0
@@ -5926,25 +5926,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2003263122}
     m_Modifications:
-    - target: {fileID: 904858195799580812, guid: 35e2530fe0a88fa41a1f905b65592c0a, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
     - target: {fileID: 3270189614062094550, guid: 35e2530fe0a88fa41a1f905b65592c0a, type: 3}
       propertyPath: m_Name
       value: Spawner Signed Paper
-      objectReference: {fileID: 0}
-    - target: {fileID: 3270189614062094550, guid: 35e2530fe0a88fa41a1f905b65592c0a, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555051688813637611, guid: 35e2530fe0a88fa41a1f905b65592c0a, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 6528821426523417258, guid: 35e2530fe0a88fa41a1f905b65592c0a, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8489822718592963184, guid: 35e2530fe0a88fa41a1f905b65592c0a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6058,10 +6042,6 @@ PrefabInstance:
     - target: {fileID: 2285654791648825315, guid: 0705f536f8394df44923f1b8538e657e, type: 3}
       propertyPath: m_Name
       value: Spawner Stamp Paper
-      objectReference: {fileID: 0}
-    - target: {fileID: 6792073402289017578, guid: 0705f536f8394df44923f1b8538e657e, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
