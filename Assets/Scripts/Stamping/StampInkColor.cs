@@ -1,7 +1,10 @@
-public enum StampInkColor
+namespace Stamping
 {
-    None,
-    Red,
-    Green,
-    Black
+    public enum StampInkColor
+    {
+        None,
+        Red,
+        Green,
+        Black
+    }
 }

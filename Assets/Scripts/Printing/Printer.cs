@@ -1,3 +1,4 @@
+using Stamping;
 using UnityEngine;
 
 public class Printer : ObjectSpawner

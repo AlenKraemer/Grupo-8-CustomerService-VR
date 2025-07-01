@@ -1,4 +1,7 @@
 ﻿using UnityEngine.Events;
 
-[System.Serializable]
-public class StampEvent : UnityEvent<StampData> { }
+namespace Stamping
+{
+    [System.Serializable]
+    public class StampEvent : UnityEvent<StampData> { }
+}

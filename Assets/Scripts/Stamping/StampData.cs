@@ -1,20 +1,23 @@
 ﻿using UnityEngine;
 
-[System.Serializable]
-public class StampData
+namespace Stamping
 {
-    public Vector3 position;
-    public Quaternion rotation;
-    public StampSO stampSO;
-    public StampInkColor inkColor;
-    public Vector3 stampSize;
-
-    public StampData(Vector3 position, Quaternion rotation, StampSO stampSO, StampInkColor inkColor, Vector3 stampSize)
+    [System.Serializable]
+    public class StampData
     {
-        this.position = position;
-        this.rotation = rotation;
-        this.stampSO = stampSO;
-        this.inkColor = inkColor;
-        this.stampSize = stampSize;
+        public Vector3 position;
+        public Quaternion rotation;
+        public StampSO stampSO;
+        public StampInkColor inkColor;
+        public Vector3 stampSize;
+
+        public StampData(Vector3 position, Quaternion rotation, StampSO stampSO, StampInkColor inkColor, Vector3 stampSize)
+        {
+            this.position = position;
+            this.rotation = rotation;
+            this.stampSO = stampSO;
+            this.inkColor = inkColor;
+            this.stampSize = stampSize;
+        }
     }
 }

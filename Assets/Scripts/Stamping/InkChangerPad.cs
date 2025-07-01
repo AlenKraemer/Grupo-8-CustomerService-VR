@@ -1,26 +1,74 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
-/// <summary>
-/// Manages ink zones to change the ink color of stamping tools upon trigger entry.
-/// </summary>
-public class InkChangerPad : MonoBehaviour
+namespace Stamping
 {
-    [SerializeField]
-    private StampInkColor inkColor; // The ink color associated with this zone
-
     /// <summary>
-    /// Detects when a stamping tool enters a trigger and updates its ink color.
+    /// Manages ink zones to change the ink color of stamping tools when they are in proximity.
     /// </summary>
-    private void OnTriggerEnter(Collider other)
+    public class InkChangerPad : MonoBehaviour
     {
-        // Check if the entering object is or has a stamping tool
-        var stampingTool = other.GetComponentInParent<StampingTool>();
-        if (stampingTool == null) {
-            Debug.Log($"Non-stamping tool entered: {other.name}");
-            return;
+        [Header("Color Zone Colliders")]
+        [SerializeField] private Collider _redZoneCollider;
+        [SerializeField] private Collider _greenZoneCollider;
+        [SerializeField] private Collider _blackZoneCollider;
+        
+        [Header("Detection Settings")]
+        [SerializeField] private bool _debugMode = true;
+        
+        // Dictionary to map colliders to their respective ink colors
+        private readonly Dictionary<Collider, StampInkColor> _zoneMap = new();
+        
+        private void Awake()
+        {
+            // Setup each zone with the appropriate ink color
+            SetupZone(_redZoneCollider, StampInkColor.Red);
+            SetupZone(_greenZoneCollider, StampInkColor.Green);
+            SetupZone(_blackZoneCollider, StampInkColor.Black);
         }
-
-        // Set the stamping tool's ink color to this zone's color
-        stampingTool.SetInkColor(inkColor);
+        
+        private void SetupZone(Collider zoneCollider, StampInkColor color)
+        {
+            if (zoneCollider == null) return;
+            
+            // Store the mapping
+            _zoneMap[zoneCollider] = color;
+            
+            if (_debugMode) Debug.Log($"Setup zone {zoneCollider.name} for color {color}", zoneCollider);
+        }
+        
+        /// <summary>
+        /// Gets the ink color associated with the given otherCollider if it's one of our zones
+        /// </summary>
+        /// <param name="otherCollider">The otherCollider to check</param>
+        /// <returns>The ink color for the zone, or None if not a valid zone</returns>
+        public StampInkColor GetInkColorForCollider(Collider otherCollider)
+        {
+            return _zoneMap.GetValueOrDefault(otherCollider, StampInkColor.None);
+        }
+        
+        private void OnDrawGizmos()
+        {
+            if (!_debugMode) return;
+            
+            // Draw zone bounds for debugging
+            DrawZoneBounds(_redZoneCollider, Color.red);
+            DrawZoneBounds(_greenZoneCollider, Color.green);
+            DrawZoneBounds(_blackZoneCollider, Color.black);
+        }
+        
+        private static void DrawZoneBounds(Collider otherCollider, Color color)
+        {
+            if (otherCollider == null) return;
+            
+            var gizmoColor = color;
+            gizmoColor.a = 0.3f; // Set transparency
+            Gizmos.color = gizmoColor;
+            Gizmos.DrawCube(otherCollider.bounds.center, otherCollider.bounds.size);
+            
+            // Draw outline
+            Gizmos.color = color;
+            Gizmos.DrawWireCube(otherCollider.bounds.center, otherCollider.bounds.size);
+        }
     }
 }

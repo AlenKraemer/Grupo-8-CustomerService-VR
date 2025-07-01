@@ -1,148 +1,125 @@
 using UnityEngine;
 
-public class StampingTool : MonoBehaviour
+namespace Stamping
 {
-    public Transform stampHead;
-    public StampInkColor currentInkColor = StampInkColor.None;
-    public StampSO currentStampSO;
-
-    [SerializeField]
-    private Renderer stampHeadRenderer;
-    
-    [SerializeField]
-    private float stampForceThreshold = 0.1f;
-    
-    [SerializeField]
-    private bool autoStampOnContact = true;
-
-    public StampEvent OnStamp;
-    
-    private bool isInContact = false;
-    private StampReceiver currentReceiver = null;
-    private Vector3 contactPoint; // Store the contact point
-
-    private void Awake()
+    public class StampingTool : MonoBehaviour
     {
-        if (stampHeadRenderer == null && stampHead != null)
-        {
-            stampHeadRenderer = stampHead.GetComponent<Renderer>();
-        }
-    }
+        public Transform StampHead;
+        public StampInkColor CurrentInkColor = StampInkColor.None;
+        public StampSO CurrentStampSO;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (currentInkColor == StampInkColor.None || currentStampSO == null)
+        [SerializeField]
+        private Renderer _stampHeadRenderer;
+    
+        [SerializeField]
+        private float _stampForceThreshold = 0.1f;
+    
+        [SerializeField]
+        private bool _autoStampOnContact = true;
+
+        public StampEvent OnStamp;
+    
+        private bool _isInContact;
+        private StampReceiver _currentReceiver;
+        private Vector3 _contactPoint; // Store the contact point
+
+        private void Awake()
         {
-            Debug.Log("Ignoring collision because ink color is None or no stamp is set");
-            return;
+            if (_stampHeadRenderer == null && StampHead != null)
+            {
+                _stampHeadRenderer = StampHead.GetComponent<Renderer>();
+            }
         }
 
-        var receiver = other.GetComponent<StampReceiver>();
-        if (receiver != null)
+        private void OnTriggerEnter(Collider other)
         {
+            if (CurrentInkColor == StampInkColor.None || CurrentStampSO == null)
+            {
+                Debug.Log("Ignoring collision because ink color is None or no stamp is set");
+                return;
+            }
+
+            var receiver = other.GetComponent<StampReceiver>();
+            if (receiver == null) return;
             Debug.Log($"Stamp head made contact with StampReceiver: {other.name}");
-            currentReceiver = receiver;
-            isInContact = true;
+            _currentReceiver = receiver;
+            _isInContact = true;
             
-            // Calculate closest point on the collider to the stamp head
-            contactPoint = other.ClosestPoint(stampHead.position);
+            // Calculate the closest point on the collider to the stamp head
+            _contactPoint = other.ClosestPoint(StampHead.position);
             
-            if (autoStampOnContact)
+            if (_autoStampOnContact)
             {
                 Stamp();
             }
         }
-    }
     
-    private void OnTriggerExit(Collider other)
-    {
-        var receiver = other.GetComponent<StampReceiver>();
-        if (receiver != null && receiver == currentReceiver)
-        {
-            Debug.Log($"Stamp head left contact with StampReceiver: {other.name}");
-            isInContact = false;
-            currentReceiver = null;
-        }
-    }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (currentInkColor == StampInkColor.None || currentStampSO == null)
+        private void OnCollisionEnter(Collision collision)
         {
-            Debug.Log("Ignoring collision because ink color is None or no stamp is set");
-            return;
-        }
+            // First, check if this is an ink pad zone collision
+            var inkPad = collision.gameObject.GetComponentInParent<InkChangerPad>();
+            if (inkPad != null)
+            {
+                // This is a collision with an ink pad, get the ink color for this zone
+                var zoneColor = inkPad.GetInkColorForCollider(collision.collider);
+                if (zoneColor != StampInkColor.None)
+                {
+                    SetInkColor(zoneColor);
+                    Debug.Log($"Changed stamp ink color to {zoneColor} from ink pad");
+                    return;
+                }
+            }
+        
+            // If not an ink pad, handle normal stamp collision
+            if (CurrentStampSO == null)
+            {
+                Debug.Log("Ignoring collision because ink color is None or no stamp is set");
+                return;
+            }
 
-        var receiver = collision.gameObject.GetComponent<StampReceiver>();
-        if (receiver != null && collision.relativeVelocity.magnitude > stampForceThreshold)
-        { 
-            currentReceiver = receiver;
-            isInContact = true;
+            var receiver = collision.gameObject.GetComponent<StampReceiver>();
+        
+            if (receiver == null || !(collision.relativeVelocity.magnitude > _stampForceThreshold)) return;
+        
+            _currentReceiver = receiver;
+            _isInContact = true;
             
             // Store the contact point from the collision
-            contactPoint = collision.contacts[0].point;
+            _contactPoint = collision.contacts[0].point;
             
-            if (autoStampOnContact)
+            if (_autoStampOnContact)
             {
                 Stamp();
             }
         }
-    }
 
-    public void SetInkColor(StampInkColor newColor)
-    {
-        currentInkColor = newColor;
-        UpdateStampHeadColor();
-    }
-
-    private void UpdateStampHeadColor()
-    {
-        if (stampHeadRenderer != null)
+        private void SetInkColor(StampInkColor newColor)
         {
-            Color inkColor = GetColorFromInk(currentInkColor);
-            stampHeadRenderer.material.color = inkColor;
+            CurrentInkColor = newColor;
+            // UpdateStampHeadColor() call removed - we don't want to modify the material color
+            Debug.Log($"Ink color set to {newColor} without changing material");
         }
-    }
 
-    private Color GetColorFromInk(StampInkColor ink)
-    {
-        return ink switch
+        private void Stamp()
         {
-            StampInkColor.Red => Color.red,
-            StampInkColor.Green => Color.green,
-            StampInkColor.Black => Color.black,
-            _ => Color.white
-        };
-    }
+            if (CurrentStampSO == null || CurrentInkColor == StampInkColor.None || StampHead == null)
+                return;
 
-    public void SetStampSO(StampSO newStampSO)
-    {
-        currentStampSO = newStampSO;
-    }
+            var data = new StampData(
+                _isInContact ? _contactPoint : StampHead.position, // Use contact point if in contact
+                StampHead.rotation,
+                CurrentStampSO,
+                CurrentInkColor,
+                StampHead.lossyScale
+            );
 
-    public void Stamp()
-    {
-        if (currentStampSO == null || currentInkColor == StampInkColor.None || stampHead == null)
-            return;
-
-        var data = new StampData(
-            isInContact ? contactPoint : stampHead.position, // Use contact point if in contact
-            stampHead.rotation,
-            currentStampSO,
-            currentInkColor,
-            stampHead.lossyScale
-        );
-
-        OnStamp?.Invoke(data);
+            OnStamp?.Invoke(data);
         
-        if (isInContact && currentReceiver != null)
-        {
-            currentReceiver.HandleStamp(data);
+            if (_isInContact && _currentReceiver != null)
+            {
+                _currentReceiver.HandleStamp(data);
+            }
         }
-    }
-    
-    public bool IsInContactWithReceiver()
-    {
-        return isInContact && currentReceiver != null;
     }
 }

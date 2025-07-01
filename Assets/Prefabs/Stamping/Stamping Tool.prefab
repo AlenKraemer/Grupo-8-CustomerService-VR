@@ -105,8 +105,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.27180904, y: 0.28366303, z: 0.045604985}
-  m_Center: {x: 0.0014719069, y: 0.010881476, z: 0.011414565}
+  m_Size: {x: 0.271809, y: 0.28366303, z: 0.28940576}
+  m_Center: {x: 0.0014719134, y: 0.010881474, z: 0.13331498}
 --- !u!1 &3662789197447410045
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,7 +136,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.568125, y: 0.568125, z: 0.568125}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2448520244029818110}
@@ -333,12 +333,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d7be197bf6aee49badac06ff241984, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stampHead: {fileID: 2448520244029818110}
-  currentInkColor: 0
-  currentStampSO: {fileID: 11400000, guid: d0cf86c50b331ba4eb695867b5544739, type: 2}
-  stampHeadRenderer: {fileID: 2059008816185217283}
-  stampForceThreshold: 0.1
-  autoStampOnContact: 1
+  StampHead: {fileID: 0}
+  CurrentInkColor: 0
+  CurrentStampSO: {fileID: 0}
+  _stampHeadRenderer: {fileID: 0}
+  _stampForceThreshold: 0.1
+  _autoStampOnContact: 1
   OnStamp:
     m_PersistentCalls:
       m_Calls: []
