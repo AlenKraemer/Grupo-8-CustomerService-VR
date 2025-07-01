@@ -163,7 +163,6 @@ GameObject:
   - component: {fileID: 333174143}
   - component: {fileID: 333174142}
   - component: {fileID: 333174141}
-  - component: {fileID: 333174144}
   m_Layer: 5
   m_Name: QuitButton
   m_TagString: Untagged
@@ -235,8 +234,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 333174144}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
+      - m_Target: {fileID: 700029406}
+        m_TargetAssemblyTypeName: Managers.GameManager, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
@@ -285,19 +284,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 333174139}
   m_CullTransparentMesh: 1
---- !u!114 &333174144
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 333174139}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7ae70400e475a243bfb18c42ce55e33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneToLoad: '-'
 --- !u!1001 &660585909
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -365,6 +351,7 @@ GameObject:
   m_Component:
   - component: {fileID: 700029405}
   - component: {fileID: 700029404}
+  - component: {fileID: 700029406}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -448,6 +435,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &700029406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700029403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05dfea057f32cf3499ba0e9da96ca83a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questManager: {fileID: 0}
+  paperUpdater: {fileID: 0}
+  paperworkBase: {fileID: 0}
+  _customerSpawnerData:
+    _spawnPoint: {fileID: 0}
+    _customerData: []
+    _customerPrefab: {fileID: 0}
+    _maxCustomers: 5
+  _signedPaperSpawnerData:
+    _spawnPoint: {fileID: 0}
+    _paperPrefab: {fileID: 0}
+    _maxPapers: 10
+  _stampSpawnerData:
+    _spawnPoint: {fileID: 0}
+    _stampPrefab: {fileID: 0}
+    _stampTemplate: {fileID: 0}
+    _maxStamps: 5
+  _tramitesCompletados:
+    currentScore: 0
+    scoreMultiplier: 1
 --- !u!1 &741423207
 GameObject:
   m_ObjectHideFlags: 0
@@ -460,7 +479,6 @@ GameObject:
   - component: {fileID: 741423211}
   - component: {fileID: 741423210}
   - component: {fileID: 741423209}
-  - component: {fileID: 741423212}
   m_Layer: 5
   m_Name: StartButton
   m_TagString: Untagged
@@ -532,16 +550,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 741423212}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
+      - m_Target: {fileID: 700029406}
+        m_TargetAssemblyTypeName: Managers.GameManager, Assembly-CSharp
         m_MethodName: ChangeScene
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Gameplay2
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &741423210
@@ -582,19 +600,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 741423207}
   m_CullTransparentMesh: 1
---- !u!114 &741423212
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 741423207}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7ae70400e475a243bfb18c42ce55e33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneToLoad: Gameplay
 --- !u!1001 &762884401
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1153,8 +1158,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 2.3583312, z: 10.000001}
-  m_Center: {x: 0, y: -1.1653781, z: 0}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!23 &1741985862
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1177,7 +1182,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1796300093539065552, guid: a5ee092cbf09d9a4fb2cf040302fb694, type: 3}
+  - {fileID: 2100000, guid: 8af8627034a468342854b1eaa636478b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1206,7 +1211,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1741985860}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -8380477868790722310, guid: b985cc06e85df124f8f0d8e98fa417e4, type: 3}
 --- !u!4 &1741985864
 Transform:
   m_ObjectHideFlags: 0
@@ -1215,9 +1220,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1741985860}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.39629936, y: 0, z: -2.5627956}
-  m_LocalScale: {x: 2.7207198, y: 1, z: 3.8623998}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -18.98}
+  m_LocalScale: {x: 25, y: 1, z: 25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
