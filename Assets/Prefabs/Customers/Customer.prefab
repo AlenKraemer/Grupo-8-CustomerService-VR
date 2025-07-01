@@ -96,7 +96,6 @@ GameObject:
   - component: {fileID: 8382873144364656694}
   - component: {fileID: 8916392945107150259}
   - component: {fileID: 7285786877381381787}
-  - component: {fileID: 1272381939954402159}
   m_Layer: 0
   m_Name: Customer
   m_TagString: Untagged
@@ -154,25 +153,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86de068f60df5c94fb153ce8d897f5eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chatBubble: {fileID: 7401382656924153949}
-  dataTest: {fileID: 11400000, guid: 81a4f40bce264174aa4984fde136db09, type: 2}
---- !u!114 &1272381939954402159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6255018815869866859}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab42203b882140f479a469c08d72f474, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meshRenderer: {fileID: 5365581358636163839}
-  meshFilter: {fileID: 4328757572271988437}
-  paperwork:
-    paperworkType: 0
-    paperworkText: 
+  _chatBubble: {fileID: 7401382656924153949}
+  _meshRenderer: {fileID: 5365581358636163839}
+  _meshFilter: {fileID: 4328757572271988437}
 --- !u!1001 &2704865145897993495
 PrefabInstance:
   m_ObjectHideFlags: 0

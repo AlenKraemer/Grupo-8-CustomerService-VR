@@ -1,5 +1,8 @@
 using System.Linq;
+using Custom;
+using Interfaces;
 using UnityEngine;
+using Writing;
 
 public class Pen : MonoBehaviour, IUpdatable
 {
@@ -19,8 +22,34 @@ public class Pen : MonoBehaviour, IUpdatable
 
     private void Start()
     {
-        CustomUpdateManager.Instance.Suscribe(this);
+        // Add null checks to prevent null reference exceptions
+        if (CustomUpdateManager.Instance == null)
+        {
+            Debug.LogError("CustomUpdateManager.Instance is null. Make sure CustomUpdateManager is initialized before Pen.");
+            return;
+        }
+        
+        if (tip == null)
+        {
+            Debug.LogError("Tip Transform is not assigned in Pen script.");
+            return;
+        }
+
+        CustomUpdateManager.Instance.Subscribe(this);
         _renderer = tip.GetComponent<Renderer>();
+        
+        if (_renderer == null)
+        {
+            Debug.LogError("No Renderer component found on tip Transform.");
+            return;
+        }
+        
+        if (_renderer.material == null)
+        {
+            Debug.LogError("No material found on tip Renderer.");
+            return;
+        }
+        
         _colors = Enumerable.Repeat(_renderer.material.color, penSize * penSize).ToArray();
     }
 

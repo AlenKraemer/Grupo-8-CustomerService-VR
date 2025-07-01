@@ -1,4 +1,7 @@
-public interface IUpdatable 
+namespace Interfaces
 {
-    void OnUpdate();
+    public interface IUpdatable 
+    {
+        void OnUpdate();
+    }
 }

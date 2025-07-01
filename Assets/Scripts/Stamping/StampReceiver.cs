@@ -1,3 +1,4 @@
+using Managers;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -6,7 +7,6 @@ namespace Stamping
     public class StampReceiver : PaperworkBase
     {
         [SerializeField] private GameObject _childs;
-        [SerializeField] private GameObject _stampTemplate;
         private Vector3 _lastPosition;
     
         // Add reference to XR component
@@ -67,7 +67,7 @@ namespace Stamping
         {
             if (!isDone) return;
             Debug.Log($"StampReceiver retreating at {this.transform.position}");
-            GameManager.Instance.stampSpawn.Finished(this);
+            GameManager.Instance.FinishedStamp(this);
         }
 
         public void HandleStamp(StampData data)
@@ -78,15 +78,20 @@ namespace Stamping
                 return;
             }
         
-            // Instantiate the template inside the childs GameObject
-            GameObject stamp = Instantiate(_stampTemplate, _childs.transform);
+            // Get stamp template from GameManager's StampSpawnerData
+            var stampTemplate = GameManager.Instance.StampTemplate;
+            if (stampTemplate == null)
+            {
+                Debug.LogError("No stamp template found in StampSpawnerData");
+                return;
+            }
+
+            // Instantiate the template from the spawner data
+            GameObject stamp = Instantiate(stampTemplate, _childs.transform);
     
             // Position the stamp at the exact collision point
             var position = data.position;
             stamp.transform.position = new Vector3(position.x, position.y, position.z);
-
-            // Ensure y position is exactly 0 (additional guarantee)
-            stamp.transform.position = new Vector3(stamp.transform.position.x, stamp.transform.position.y, stamp.transform.position.z);
 
 
             // Get the renderer component

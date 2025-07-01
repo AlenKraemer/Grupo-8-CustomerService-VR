@@ -3,8 +3,10 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using Customers;
+using Score;
 
-namespace Score
+namespace Managers
 {
     public class QuestManager : MonoBehaviour
     {
@@ -14,7 +16,6 @@ namespace Score
         public bool isObjectiveCompleted;
 
         [SerializeField] private Text tramitesCompletadosText;
-        private ScoreManager scoreManager;
         private int servicedCustomers = 0;
 
         private Queue<string> questQueue = new();
@@ -23,7 +24,6 @@ namespace Score
 
         private void Start()
         {
-            scoreManager = GameManager.Instance.scoreManager;
             UpdateTramitesCompletadosText();
 
             foreach (string quest in questList) questQueue.Enqueue(quest);
@@ -72,8 +72,6 @@ namespace Score
                 questId = currentId.questId;
             }
             var questState = questStates.FirstOrDefault(q => q.questId == questId);
-            //if (questState == null)
-            //    questStates.Add(new QuestState(questId, PaperworkType.signature,isCompleted, true));
 
             questState.completed = isCompleted;
             questState.processed = true;
@@ -87,13 +85,12 @@ namespace Score
             servicedCustomers++;
             onButtonPressedCustomer?.Invoke();
             isObjectiveCompleted = false;
-            GameManager.Instance.customerSpawn.SpawnCustomer();
-
+            GameManager.Instance.SpawnCustomer();
         }
 
         private void UpdateScore()
         {
-            var score = scoreManager?.TramitesCompletadosScore();
+            var score = GameManager.Instance?.TramitesCompletadosScore();
             if (score != null)
             {
                 score.IncreaseScore(1);
@@ -103,7 +100,7 @@ namespace Score
 
         private void UpdateTramitesCompletadosText()
         {
-            var score = scoreManager?.TramitesCompletadosScore();
+            var score = GameManager.Instance?.TramitesCompletadosScore();
             if (tramitesCompletadosText != null && score != null)
                 tramitesCompletadosText.text = $"{score.CurrentScore}";
         }

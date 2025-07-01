@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7395856448517831549
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1023020424974546551}
+  - component: {fileID: 8696068182775090059}
+  - component: {fileID: 6714923122799744735}
+  - component: {fileID: 2537077728930947876}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1023020424974546551
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7395856448517831549}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8696068182775090059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7395856448517831549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05dfea057f32cf3499ba0e9da96ca83a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questManager: {fileID: 6714923122799744735}
+  paperUpdater: {fileID: 0}
+  paperworkBase: {fileID: 0}
+  _customerSpawnerData:
+    _spawnPoint: {fileID: 0}
+    _customerData:
+    - {fileID: 11400000, guid: 96d5ab6796f94a94b9daef203d79f3bc, type: 2}
+    - {fileID: 11400000, guid: afcb3dc76633cdb49aa130e68f80eabd, type: 2}
+    - {fileID: 11400000, guid: 81a4f40bce264174aa4984fde136db09, type: 2}
+    - {fileID: 11400000, guid: e158f5a5da7699a40bbcb09300fa9e7c, type: 2}
+    _customerPrefab: {fileID: 6255018815869866859, guid: 45fe3ffe4b899c2459f34a5765d987cd, type: 3}
+    _maxCustomers: 5
+  _signedPaperSpawnerData:
+    _spawnPoint: {fileID: 0}
+    _paperPrefab: {fileID: 4189162169952983764, guid: d1943ad98c74c4f46b57bf591b84be76, type: 3}
+    _maxPapers: 1
+  _stampSpawnerData:
+    _spawnPoint: {fileID: 0}
+    _stampPrefab: {fileID: 6677267250215306300, guid: 595f7a68d8ae6fa4abcfa0b4d8d25ecc, type: 3}
+    _stampTemplate: {fileID: 7667701712839225140, guid: a271c780e121cb04b87b9363e65b7b12, type: 3}
+    _maxStamps: 5
+  _tramitesCompletados:
+    currentScore: 0
+    scoreMultiplier: 1
+--- !u!114 &6714923122799744735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7395856448517831549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cf0a26bd62f4cf2b1ee83d057cc035e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isObjectiveCompleted: 0
+  tramitesCompletadosText: {fileID: 0}
+  questList: []
+  questStates: []
+--- !u!114 &2537077728930947876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7395856448517831549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 237f4f0b0c3e94f4f801531df796268d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

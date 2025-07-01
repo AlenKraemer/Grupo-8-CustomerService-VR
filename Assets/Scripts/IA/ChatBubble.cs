@@ -3,8 +3,6 @@ using TMPro;
 
 public class ChatBubble : MonoBehaviour
 {
-
-    [SerializeField] private Transform prefab;
     [SerializeField] private SpriteRenderer backgroundSpriteRenderer;
     [SerializeField] private TextMeshPro textMeshPro;
     [SerializeField] private Vector2 textOffset;

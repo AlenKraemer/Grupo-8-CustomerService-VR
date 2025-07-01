@@ -189,10 +189,9 @@ MonoBehaviour:
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4432580172714155759}
-        m_TargetAssemblyTypeName: UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets.IncrementUIText,
-          Unity.XR.Interaction.Toolkit.Samples.StarterAssets
-        m_MethodName: IncrementText
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Managers.QuestManager, Assembly-CSharp
+        m_MethodName: TryCompleteQuest
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

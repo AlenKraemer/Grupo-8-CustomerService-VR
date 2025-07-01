@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: b23a5a77585981c4ca4d6e9fe57760cb, type: 3}
+  - {fileID: 2100000, guid: 0136241c4e0415d41bd8f1059bf7b71a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -148,7 +148,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: b23a5a77585981c4ca4d6e9fe57760cb, type: 3}
+  - {fileID: 2100000, guid: 0136241c4e0415d41bd8f1059bf7b71a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -180,8 +180,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2002859869696538779}
   - component: {fileID: 4717242249082881999}
-  - component: {fileID: 7436478350381752501}
-  - component: {fileID: 3457622148780095881}
   m_Layer: 0
   m_Name: Printer
   m_TagString: Untagged
@@ -227,36 +225,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.35, y: 1.07, z: 1.3}
   m_Center: {x: 0, y: 0.4, z: 0}
---- !u!114 &7436478350381752501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2285654791648825315}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32ee8c4f78144e74997c0567821eb1f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _originalPrefab: {fileID: 6677267250215306300, guid: 595f7a68d8ae6fa4abcfa0b4d8d25ecc, type: 3}
-  _usedPool: []
-  _availablePool: []
-  _maxObjects: 5
---- !u!114 &3457622148780095881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2285654791648825315}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df1875ccc87b100428015ab495023fb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectPool: {fileID: 7436478350381752501}
-  spawnPoint: {fileID: 8543364262755157330}
 --- !u!1 &6792073402289017578
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,17 +1,20 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "IAData", menuName ="ScriptableObjects/IAData")]
-public class IAData : ScriptableObject
+namespace IA
 {
-    public Mesh bodyType;
-    public Material skinColor;
-    public Paperwork paperwork;
-    public string id;
-}
+    [CreateAssetMenu(fileName = "IAData", menuName ="ScriptableObjects/IAData")]
+    public class IAData : ScriptableObject
+    {
+        public Mesh bodyType;
+        public Material skinColor;
+        public Paperwork paperwork;
+        public string id;
+    }
 
-[System.Serializable]
-public struct Paperwork
-{
-    public PaperworkType paperworkType;
-    public string paperworkText;
+    [System.Serializable]
+    public struct Paperwork
+    {
+        public PaperworkType paperworkType;
+        public string paperworkText;
+    }
 }

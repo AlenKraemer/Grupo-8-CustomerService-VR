@@ -1,6 +1,6 @@
 using System;
 
-namespace Score
+namespace Customers
 {
     [Serializable]
     public class QuestState
