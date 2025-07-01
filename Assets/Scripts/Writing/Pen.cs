@@ -11,7 +11,7 @@ public class Pen : MonoBehaviour, IUpdatable
     [SerializeField] private float tipHeight;
     [SerializeField] private LayerMask layerMask;
 
-    private Renderer _renderer;
+    private Color color = Color.red;
     private Color[] _colors;
     private RaycastHit _touch;
     private Paper _paper;
@@ -36,21 +36,9 @@ public class Pen : MonoBehaviour, IUpdatable
         }
 
         CustomUpdateManager.Instance.Subscribe(this);
-        _renderer = tip.GetComponent<Renderer>();
+       
         
-        if (_renderer == null)
-        {
-            Debug.LogError("No Renderer component found on tip Transform.");
-            return;
-        }
-        
-        if (_renderer.material == null)
-        {
-            Debug.LogError("No material found on tip Renderer.");
-            return;
-        }
-        
-        _colors = Enumerable.Repeat(_renderer.material.color, penSize * penSize).ToArray();
+        _colors = Enumerable.Repeat(color, penSize * penSize).ToArray();
     }
 
     public void OnUpdate()
