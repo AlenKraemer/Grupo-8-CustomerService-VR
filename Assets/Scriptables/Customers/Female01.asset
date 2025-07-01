@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c9d008ac06d6e445b51736fe0c61bed, type: 3}
   m_Name: Female01
   m_EditorClassIdentifier: 
-  bodyType: {fileID: 7398509403596113055, guid: 2eb3fe0e136282f42a98ca8186ee9545, type: 3}
-  skinColor: {fileID: -1796300093539065552, guid: 2eb3fe0e136282f42a98ca8186ee9545, type: 3}
+  bodyType: {fileID: 889868670818846259, guid: 872ddda502e236b45bc978211b5e6964, type: 3}
+  skinColor: {fileID: 2100000, guid: 8af8627034a468342854b1eaa636478b, type: 2}
   paperwork:
     paperworkType: 0
     paperworkText: Firmar
