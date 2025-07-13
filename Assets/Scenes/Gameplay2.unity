@@ -1087,7 +1087,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1646175554}
-  - {fileID: 1894450330}
   - {fileID: 1220623065}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1652,7 +1651,7 @@ PrefabInstance:
     - target: {fileID: 8476944375635284684, guid: f6d9ef1be72baec4d9c795d2f94385f5, type: 3}
       propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1894450331}
+      objectReference: {fileID: 0}
     - target: {fileID: 8476944375635284684, guid: f6d9ef1be72baec4d9c795d2f94385f5, type: 3}
       propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: TryCompleteQuest
@@ -2594,63 +2593,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 397a6311ead26184e905c9c13d93c310, type: 3}
---- !u!1001 &866142354
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
-      propertyPath: m_Name
-      value: XR Device Simulator
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
 --- !u!4 &887168568 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 397a6311ead26184e905c9c13d93c310, type: 3}
@@ -4820,9 +4762,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05dfea057f32cf3499ba0e9da96ca83a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questManager: {fileID: 1894450331}
-  paperUpdater: {fileID: 37739419}
-  paperworkBase: {fileID: 0}
+  QuestManager:
+    isObjectiveCompleted: 0
+    tramitesCompletadosText: {fileID: 299209741}
+  PaperUpdater: {fileID: 0}
+  PaperworkBase: {fileID: 0}
   _customerSpawnerData:
     _spawnPoint: {fileID: 1035294313}
     _customerData:
@@ -4831,7 +4775,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: afcb3dc76633cdb49aa130e68f80eabd, type: 2}
     - {fileID: 11400000, guid: e158f5a5da7699a40bbcb09300fa9e7c, type: 2}
     _customerPrefab: {fileID: 6255018815869866859, guid: 45fe3ffe4b899c2459f34a5765d987cd, type: 3}
-    _maxCustomers: 5
+    _maxCustomers: 1
   _signedPaperSpawnerData:
     _spawnPoint: {fileID: 78896176688004552}
     _paperPrefab: {fileID: 4189162169952983764, guid: d1943ad98c74c4f46b57bf591b84be76, type: 3}
@@ -5377,54 +5321,6 @@ Transform:
   - {fileID: 1742427248}
   m_Father: {fileID: 33147800}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1894450329
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1894450330}
-  - component: {fileID: 1894450331}
-  m_Layer: 0
-  m_Name: QuestManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1894450330
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1894450329}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 155938239}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1894450331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1894450329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cf0a26bd62f4cf2b1ee83d057cc035e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isObjectiveCompleted: 0
-  tramitesCompletadosText: {fileID: 299209741}
-  questList: []
-  questStates: []
 --- !u!4 &1906952262 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e6ff27e1aad52c5459517e215931c5e8, type: 3}
@@ -6166,4 +6062,3 @@ SceneRoots:
   - {fileID: 1407105678}
   - {fileID: 1344151156}
   - {fileID: 772129014}
-  - {fileID: 866142354}

@@ -8,7 +8,6 @@ namespace Custom
     {
         private static CustomUpdateManager _instance;
         public static CustomUpdateManager Instance => _instance;
-
         private readonly List<IUpdatable> _updatables = new();
 
         private void Awake()
@@ -18,7 +17,6 @@ namespace Custom
 
             DontDestroyOnLoad(gameObject);
         }
-
         private void Update()
         {
             foreach (var item in _updatables)
@@ -31,12 +29,10 @@ namespace Custom
         {
             if (_instance == this) _instance = null;
         }
-
         public void Subscribe(IUpdatable item)
         {
             _updatables.Add(item);
         }
-
         public void UnSuscribe(IUpdatable item)
         {
             _updatables.Remove(item);

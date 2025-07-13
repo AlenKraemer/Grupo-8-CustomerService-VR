@@ -4,23 +4,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using Customers;
+using Enums;
 using Score;
 
 namespace Managers
 {
-    public class QuestManager : MonoBehaviour
+    [System.Serializable]
+    public class QuestManager
     {
         public Action onButtonPressed;
         public Action onButtonPressedCustomer;
-
         public bool isObjectiveCompleted;
-
         [SerializeField] private Text tramitesCompletadosText;
         private int servicedCustomers = 0;
-
         private Queue<string> questQueue = new();
-        [SerializeField] private List<string> questList = new();
-        [SerializeField] private List<QuestState> questStates = new();
+        private List<string> questList = new();
+        private List<QuestState> questStates = new();
 
         private void Start()
         {
@@ -29,7 +28,6 @@ namespace Managers
             foreach (string quest in questList) questQueue.Enqueue(quest);
             //if (questQueue.Count == 0) AddTestQuests();
         }
-
         public void AddQuestToQueue(string questId, PaperworkType paperworkType)
         {
             questQueue.Enqueue(questId);
@@ -37,16 +35,11 @@ namespace Managers
             //if (questStates.All(q => q.questId != questId))
             questStates.Add(new QuestState(questId, paperworkType, false, false));
         }
-
-        //[ContextMenu("Add Test Quest")]
-        //public void AddTestQuest() => AddQuestToQueue($"Form_{Random.Range(100, 999)}");
-
         [ContextMenu("Try Complete Current Quest")]
         public void TryCompleteQuest()
         {
             CompleteQuest();
         }
-
         [ContextMenu("Force Complete Current Quest")]
         public void ForceCompleteQuest()
         {
@@ -61,10 +54,7 @@ namespace Managers
         {
             return questStates[servicedCustomers];
         }
-
-
-
-        public void CompleteQuest(string questId = "", bool isCompleted = false)
+        private void CompleteQuest(string questId = "", bool isCompleted = false)
         {
             if (questId == "")
             {
@@ -73,8 +63,11 @@ namespace Managers
             }
             var questState = questStates.FirstOrDefault(q => q.questId == questId);
 
-            questState.completed = isCompleted;
-            questState.processed = true;
+            if (questState != null)
+            {
+                questState.completed = isCompleted;
+                questState.processed = true;
+            }
 
 
             if (isObjectiveCompleted)
@@ -87,7 +80,6 @@ namespace Managers
             isObjectiveCompleted = false;
             GameManager.Instance.SpawnCustomer();
         }
-
         private void UpdateScore()
         {
             var score = GameManager.Instance?.TramitesCompletadosScore();
@@ -97,21 +89,11 @@ namespace Managers
                 UpdateTramitesCompletadosText();
             }
         }
-
         private void UpdateTramitesCompletadosText()
         {
             var score = GameManager.Instance?.TramitesCompletadosScore();
             if (tramitesCompletadosText != null && score != null)
                 tramitesCompletadosText.text = $"{score.CurrentScore}";
         }
-
-
-        //private void AddTestQuests()
-        //{
-        //    AddQuestToQueue("Form_001");
-        //    AddQuestToQueue("Form_002");
-        //    AddQuestToQueue("Form_003");
-        //    AddQuestToQueue("Form_004");
-        //}
     }
 }

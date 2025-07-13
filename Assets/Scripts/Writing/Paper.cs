@@ -1,3 +1,4 @@
+using Enums;
 using Managers;
 using UnityEngine;
 
@@ -11,16 +12,16 @@ namespace Writing
 
         void Start()
         {
-            paperworkType = PaperworkType.signature;
+            paperworkType = PaperworkType.Signature;
             isDone = false;
             texture = new Texture2D((int)textureSize.x, (int)textureSize.y);
             thisRenderer.material.mainTexture = texture;
-            GameManager.Instance.questManager.onButtonPressed += Retreat;
+            GameManager.Instance.QuestManager.onButtonPressed += Retreat;
         }
 
         public void InitializePaper()
         {
-            paperworkType = PaperworkType.signature;
+            paperworkType = PaperworkType.Signature;
             isDone = false;
             texture = new Texture2D((int)textureSize.x, (int)textureSize.y);
             thisRenderer.material.mainTexture = texture;
@@ -34,7 +35,7 @@ namespace Writing
 
         private void OnDisable()
         {
-            paperworkType = PaperworkType.signature;
+            paperworkType = PaperworkType.Signature;
             isDone = false;
         }
     }

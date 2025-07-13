@@ -20,14 +20,14 @@ namespace IA.MVC
         {
             _iAModel.SetData(data);
             _chatBubble.SetText(_iAModel.paperwork.paperworkText);
-            GameManager.Instance.questManager.AddQuestToQueue(_iAModel.id, _iAModel.paperwork.paperworkType);
-            GameManager.Instance.questManager.onButtonPressedCustomer += Retreat;
+            GameManager.Instance.QuestManager.AddQuestToQueue(_iAModel.id, _iAModel.paperwork.paperworkType);
+            GameManager.Instance.QuestManager.onButtonPressedCustomer += Retreat;
         }
 
         private void Retreat()
         {
             GameManager.Instance.FinishedCustomer(this);
-            GameManager.Instance.questManager.onButtonPressedCustomer -= Retreat;
+            GameManager.Instance.QuestManager.onButtonPressedCustomer -= Retreat;
         }
     }
 }

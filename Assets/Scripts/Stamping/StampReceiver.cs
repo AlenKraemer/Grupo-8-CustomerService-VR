@@ -1,3 +1,4 @@
+using Enums;
 using Managers;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -14,7 +15,7 @@ namespace Stamping
 
         private void Awake()
         {
-            paperworkType = PaperworkType.stamp;
+            paperworkType = PaperworkType.Stamp;
             isDone = false;
         
             // Cache reference to XR component
@@ -25,7 +26,7 @@ namespace Stamping
 
         private void Start()
         {
-            GameManager.Instance.questManager.onButtonPressed += Retreat;
+            GameManager.Instance.QuestManager.onButtonPressed += Retreat;
         }
 
         public void InitializeStamp(Transform spawnPos)
@@ -150,7 +151,7 @@ namespace Stamping
 
         private void OnDisable()
         {
-            paperworkType = PaperworkType.stamp;
+            paperworkType = PaperworkType.Stamp;
             isDone = false;
         }
     }

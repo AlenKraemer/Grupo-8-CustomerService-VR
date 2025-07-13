@@ -9,9 +9,8 @@ namespace Managers
         [SerializeField] private GameObject _originalPrefab;
         [SerializeField] private int _maxObjects = 10;
         [SerializeField] private Transform _parentTransform;
-        
-        private List<GameObject> _usedPool = new List<GameObject>();
-        private List<GameObject> _availablePool = new List<GameObject>();
+        private List<GameObject> _usedPool = new();
+        private List<GameObject> _availablePool = new();
 
         public void Initialize(GameObject prefab, int maxObjects, Transform parent = null)
         {
@@ -19,7 +18,6 @@ namespace Managers
             _maxObjects = maxObjects;
             _parentTransform = parent;
         }
-
         public GameObject GetObject()
         {
             GameObject pooledObject;
@@ -42,7 +40,6 @@ namespace Managers
             _usedPool.Add(pooledObject);
             return pooledObject;
         }
-
         public void ReturnToPool(GameObject obj)
         {
             if (_usedPool.Contains(obj))
@@ -52,9 +49,5 @@ namespace Managers
                 _availablePool.Add(obj);
             }
         }
-
-        public int AvailableCount => _availablePool.Count;
-        public int UsedCount => _usedPool.Count;
-        public int TotalCount => _availablePool.Count + _usedPool.Count;
     }
 }

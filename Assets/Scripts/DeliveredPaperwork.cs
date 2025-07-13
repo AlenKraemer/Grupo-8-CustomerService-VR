@@ -8,15 +8,15 @@ public class DeliveredPaperwork : MonoBehaviour
     {
         var paperwork = other.GetComponent<PaperworkBase>();
         if (paperwork == null) paperwork = other.GetComponentInParent<PaperworkBase>();
-        if (paperwork == null) paperwork = GameManager.Instance.paperworkBase;
-        var currentPaperwork = GameManager.Instance.questManager.GetQuestStatus();
+        if (paperwork == null) paperwork = GameManager.Instance.PaperworkBase;
+        var currentPaperwork = GameManager.Instance.QuestManager.GetQuestStatus();
         if (paperwork.paperworkType == currentPaperwork.paperworkType && paperwork.isDone)
         {
-            GameManager.Instance.questManager.isObjectiveCompleted = true;
+            GameManager.Instance.QuestManager.isObjectiveCompleted = true;
         }
         else
         {
-            GameManager.Instance.questManager.isObjectiveCompleted = false;
+            GameManager.Instance.QuestManager.isObjectiveCompleted = false;
         }
 
     }

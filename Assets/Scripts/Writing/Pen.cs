@@ -40,12 +40,10 @@ public class Pen : MonoBehaviour, IUpdatable
         
         _colors = Enumerable.Repeat(color, penSize * penSize).ToArray();
     }
-
     public void OnUpdate()
     {
         Draw();
     }
-
     private void Draw()
     {
         if(Physics.Raycast(tip.position, transform.up, out _touch, tipHeight, layerMask))
@@ -92,6 +90,4 @@ public class Pen : MonoBehaviour, IUpdatable
         _paper = null;
         _touchedLastFrame = false;
     }
-
-   
 }

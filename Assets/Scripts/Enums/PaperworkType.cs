@@ -1,6 +1,9 @@
-public enum PaperworkType 
+namespace Enums
 {
-   signature,
-   stamp,
-   print
+   public enum PaperworkType 
+   {
+      Signature,
+      Stamp,
+      Print
+   }
 }

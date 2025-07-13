@@ -15,12 +15,9 @@ namespace Managers
         [SerializeField] private GameObject _customerPrefab;
         [SerializeField] private int _maxCustomers = 5;
         
-        // Internal object pool - not visible in inspector
         private SerializableObjectPool _customerPool = new();
-
         public Transform SpawnPoint => _spawnPoint;
         public IAData[] CustomerData => _customerData;
-
         public void Initialize(Transform parentTransform)
         {
             if (_customerPrefab != null)
@@ -28,7 +25,6 @@ namespace Managers
                 _customerPool.Initialize(_customerPrefab, _maxCustomers, parentTransform);
             }
         }
-
         public IAController SpawnCustomer()
         {
             IAData data = GetRandomCustomer();
@@ -43,12 +39,10 @@ namespace Managers
             
             return customer;
         }
-
         public void ReturnCustomer(IAController customer)
         {
             _customerPool.ReturnToPool(customer.gameObject);
         }
-
         public IAData GetRandomCustomer()
         {
             if (_customerData == null || _customerData.Length == 0) return null;

@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
-using IA;
 using IA.MVC;
 using Score;
 using Stamping;
@@ -11,26 +10,19 @@ namespace Managers
 {
     public class GameManager : MonoBehaviour
     {
-        public QuestManager questManager;
-        public PaperUpdaterPosition paperUpdater;
-        public PaperworkBase paperworkBase;
-        
-        // Spawner configuration data (each with internal object pools)
+        [SerializeField] public QuestManager QuestManager;
+        public PaperUpdaterPosition PaperUpdater;
+        public PaperworkBase PaperworkBase;
+
         [Header("Spawner Configuration")]
         [SerializeField] private CustomerSpawnerData _customerSpawnerData;
         [SerializeField] private SignedPaperSpawnerData _signedPaperSpawnerData;
         [SerializeField] private StampSpawnerData _stampSpawnerData;
-        
-        // Score management functionality
         [Header("Score Management")]
         [SerializeField] private BasicScore _tramitesCompletados = new();
         
-        // Customer tracking
-        private List<IAController> _activeCustomers = new List<IAController>();
-        
+        private readonly List<IAController> _activeCustomers = new();
         public static GameManager Instance { get; private set; }
-
-        // Public access to stamp template for StampReceiver
         public GameObject StampTemplate => _stampSpawnerData?.StampTemplate;
 
         private void Awake()
@@ -42,22 +34,21 @@ namespace Managers
                 Destroy(this);
                 return;
             }
+
+            QuestManager ??= new QuestManager();
             
             Instance = this;
             
             // Initialize score if not already set
-            if (_tramitesCompletados == null)
-                _tramitesCompletados = new BasicScore();
+            _tramitesCompletados ??= new BasicScore();
                 
             InitializeSpawners();
         }
-
         private void Start()
         {
             // Spawn initial customer
             SpawnCustomer();
         }
-
         private void InitializeSpawners()
         {
             // Initialize all spawner data classes with their internal pools
@@ -65,8 +56,6 @@ namespace Managers
             _signedPaperSpawnerData?.Initialize(transform);
             _stampSpawnerData?.Initialize(transform);
         }
-
-        // Customer spawning functionality
         public void SpawnCustomer()
         {
             var customer = _customerSpawnerData?.SpawnCustomer();
@@ -75,7 +64,6 @@ namespace Managers
                 _activeCustomers.Add(customer);
             }
         }
-
         public void FinishedCustomer(IAController customer)
         {
             if (_activeCustomers.Contains(customer))
@@ -84,62 +72,48 @@ namespace Managers
                 _customerSpawnerData?.ReturnCustomer(customer);
             }
         }
-
-        // Signed paper spawning functionality
         public void SpawnSignedPaper()
         {
             var paper = _signedPaperSpawnerData?.SpawnPaper();
             if (paper != null)
             {
-                paperUpdater?.SetPaper(paper.transform);
-                paperworkBase = paper.GetComponent<PaperworkBase>();
+                PaperUpdater?.SetPaper(paper.transform);
+                PaperworkBase = paper.GetComponent<PaperworkBase>();
             }
         }
-
         public void FinishedSignedPaper(Paper paper)
         {
             _signedPaperSpawnerData?.ReturnPaper(paper);
         }
-
-        // Stamp spawning functionality
         public void SpawnStamp()
         {
             _stampSpawnerData?.SpawnStamp();
         }
-
         public void FinishedStamp(StampReceiver stampReceiver)
         {
             _stampSpawnerData?.ReturnStamp(stampReceiver);
         }
-
-        // Score management methods
         public BasicScore TramitesCompletadosScore()
         {
             return _tramitesCompletados;
         }
-
-        // Scene management functionality
         public void ChangeScene(string sceneToLoad)
         {
             SceneManager.LoadScene(sceneToLoad);
         }
-
         public void QuitGame()
         {
             Application.Quit();
         }
-
-        // Collider management
         public void StopCollider()
         {
-            if (paperworkBase == null) return;
-            paperworkBase.GetComponent<MeshCollider>().enabled = false;
+            if (PaperworkBase == null) return;
+            PaperworkBase.GetComponent<MeshCollider>().enabled = false;
         }
-
         public void StartCollider()
         {
-            if (paperworkBase == null) return;
-            paperworkBase.GetComponent<MeshCollider>().enabled = true;
+            if (PaperworkBase == null) return;
+            PaperworkBase.GetComponent<MeshCollider>().enabled = true;
         }
     }
 }

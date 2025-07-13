@@ -25,7 +25,7 @@ public class PaperUpdaterPosition : MonoBehaviour, IUpdatable
             return;
         }
         
-        if (GameManager.Instance.questManager == null)
+        if (GameManager.Instance.QuestManager == null)
         {
             Debug.LogError("GameManager.Instance.questManager is null.");
             return;
@@ -40,17 +40,14 @@ public class PaperUpdaterPosition : MonoBehaviour, IUpdatable
         }
         
         initialPos = this.transform.position;
-        GameManager.Instance.questManager.onButtonPressed += Retreat;
+        GameManager.Instance.QuestManager.onButtonPressed += Retreat;
     }
-
-
     public void OnUpdate()
     {
         if (paperPos == null) return;
         paperPos.position = this.transform.position + initialOffset ;
         paperPos.rotation = this.transform.rotation;
     }
-
     public void SetPaper(Transform paperPos)
     {
         myRenderer.enabled = true;
@@ -61,6 +58,4 @@ public class PaperUpdaterPosition : MonoBehaviour, IUpdatable
     {
         myRenderer.enabled = false;
     }
-
-   
 }
